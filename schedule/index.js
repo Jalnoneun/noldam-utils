@@ -21,9 +21,12 @@ const generateCode = (start, end) => {
 }
 
 /**
- * 신청서 일정 정보를 받아 실제 놀이날짜 목록으로 변환
- * @param {object} schedule 신청서 일정 정보를 담은 객체
- * @param {string} schedule.fromDate 시작 날짜
+ * 신청서 일정 정보를 받아 실제 놀이 날짜 목록으로 변환
+ * @param {Object[]} schedules 신청서 일정 정보를 담은 객체
+ * @param {string} schedules[].fromDate 시작 날짜
+ * @param {string} schedules[].toDate 종료 날짜
+ * @param {number} schedules[].start 시작 시간 index
+ * @param {number} schedules[].hour 놀이 시간
  * 
  */
 const getDatesFromSchedules = schedules => {
