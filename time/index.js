@@ -11,4 +11,27 @@ const getTimeFromIndex = (index, format = 'A hh:mm') => {
   return moment().hour(hour).minute(min).format(format)
 }
 
+/**
+ * 시작 시간부터 종료 시간까지의 표현 방식 반환
+ * @param {number} start 시작 시간 index
+ * @param {number} hour 놀이 시간
+ * @param {string} format 시간 표현 방식
+ * @param {string} separator 구분자
+ * @param {boolean} displayHour 맨 끝에 '(n시간)' 표현 여부
+ */
+const fromToTime = (
+  start,
+  hour,
+  format = 'A hh:mm',
+  separator = ' - ',
+  displayHour = false,
+  ) => {
+  const from = getTimeFromIndex(start, format)
+  const to = getTimeFromIndex(start + hour, format)
+  let result = `${from}${separator}${to}`
+  if (displayHour) result += `(${hour}시간)`
+  return result
+}
+
 exports.getTimeFromIndex = getTimeFromIndex
+exports.fromToTime = fromToTime

@@ -19,3 +19,5 @@ moment.updateLocale('ko', {
   ],
   weekdaysShort: ['일', '월', '화', '수', '목', '금', '토']
 })
+
+const _ = require('./time')
