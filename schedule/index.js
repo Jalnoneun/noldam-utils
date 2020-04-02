@@ -1,5 +1,6 @@
 const moment = require('moment')
 const DEFAULT_TIME_CODE = '00000000000000000000000000'
+const DAY_LIST = ['월', '화', '수', '목', '금', '토', '일']
 
 /**
  * 시작, 끝 인덱스를 받아 26자리 코드를 생성
@@ -82,9 +83,46 @@ const getDatesOnSameWeekday = (
   return dates
 }
 
+/**
+ * schedule 정보를 요약한 텍스트로 변환
+ * @param {Object[]} schedules 신청서 일정 정보를 담은 객체
+ * @param {number} schedules[].day 요일 index. 월요일 0, 일요일 6
+ * @param {string} schedules[].startDate 시작 날짜
+ * @param {string} schedules[].endDate 종료 날짜
+ */
+const getScheduleSummary = schedules => {
+  const format = 'M월 D일'
+  let days = []
+  let count = 0
+  let firstDate = ''
+  let lastDate = ''
+  schedules.forEach(({ day, startDate, endDate }) => {
+    if (firstDate === '') firstDate = startDate
+    else if (moment(firstDate).isAfter(startDate)) firstDate = startDate
+
+    if (lastDate === '') lastDate = endDate
+    else if (moment(lastDate).isBefore(endDate)) lastDate = endDate
+
+    days.push(day)
+    if (!endDate) count += 1
+    else {
+      count += (moment(endDate).diff(moment(startDate), 'w') + 1)
+    }
+  })
+  let endDateText = ''
+  if (lastDate !== '') endDateText = ` - ${moment(lastDate).format(format)}`
+  const text = `${moment(firstDate).format(format)}${endDateText} (총 ${count}회 놀이)`
+  const dayText = days.sort((a, b) => a - b).map(item => DAY_LIST[item]).join(',')
+  return {
+    text,
+    dayText,
+  }
+}
+
 const schedule = {
   getDatesFromSchedules,
-  getDatesOnSameWeekday
+  getDatesOnSameWeekday,
+  getScheduleSummary
 };
 
 (function(root, factory) {
