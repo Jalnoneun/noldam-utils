@@ -103,7 +103,7 @@ const getScheduleSummary = schedules => {
     if (lastDate === '') lastDate = endDate
     else if (moment(lastDate).isBefore(endDate)) lastDate = endDate
 
-    days.push(day)
+    if (!days.includes(day)) days.push(day)
     if (!endDate) count += 1
     else {
       count += (moment(endDate).diff(moment(startDate), 'w') + 1)
