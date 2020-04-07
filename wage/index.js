@@ -68,6 +68,7 @@ const getWageForOnePlay = (type, rank, hour, date, sibling) => {
 
 const wage = {
   toCurrency,
+  getHourlyWage,
   getWageForOnePlay,
 };
 
