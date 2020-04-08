@@ -97,15 +97,18 @@ const getScheduleSummary = schedules => {
   let firstDate = ''
   let lastDate = ''
   schedules.forEach(({ day, startDate, endDate }) => {
+    if (!days.includes(day)) days.push(day)
+
     if (firstDate === '') firstDate = startDate
     else if (moment(firstDate).isAfter(startDate)) firstDate = startDate
 
-    if (lastDate === '') lastDate = endDate
-    else if (moment(lastDate).isBefore(endDate)) lastDate = endDate
+    let tempLastDate = !endDate ? startDate : endDate
+    if (lastDate === '') lastDate = tempLastDate
+    else if (moment(lastDate).isBefore(tempLastDate)) lastDate = tempLastDate
 
-    if (!days.includes(day)) days.push(day)
-    if (!endDate) count += 1
-    else {
+    if (!endDate) {
+      count += 1
+    } else {
       count += (moment(endDate).diff(moment(startDate), 'w') + 1)
     }
   })
