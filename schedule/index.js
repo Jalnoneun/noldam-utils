@@ -1,25 +1,5 @@
 const moment = require('moment')
-const DEFAULT_TIME_CODE = '00000000000000000000000000'
 const DAY_LIST = ['월', '화', '수', '목', '금', '토', '일']
-
-/**
- * 시작, 끝 인덱스를 받아 26자리 코드를 생성
- * @param {number} start 0~24 사이 시작 index 값
- * @param {number} end 1~25 사이 종료 index 값
- * @returns {string}
- */
-const generateCode = (start, end) => {
-  if (typeof start !== 'number' && typeof end !== 'number') return null
-  let code = ''
-  for (let i = 0; i < end - start; i++) {
-    code += '1'
-  }
-  return (
-    DEFAULT_TIME_CODE.substring(0, start) +
-    code +
-    DEFAULT_TIME_CODE.substring(end)
-  )
-}
 
 /**
  * 신청서 일정 정보를 받아 실제 놀이 날짜 목록으로 변환
@@ -28,7 +8,7 @@ const generateCode = (start, end) => {
  * @param {string} schedules[].endDate 종료 날짜
  * @param {number} schedules[].start 시작 시간 index
  * @param {number} schedules[].hour 놀이 시간
- * 
+ * @return {Object[]}
  */
 const getDatesFromSchedules = schedules => {
   let dates = []
@@ -69,7 +49,8 @@ const getDatesFromSchedules = schedules => {
 const getDatesOnSameWeekday = (
   date,
   count = 8,
-  firstDateIncluded) => {
+  firstDateIncluded
+) => {
   const format = 'YYYY-MM-DD'
   let dates = []
   let repeatCount = firstDateIncluded ? count - 1 : count
@@ -84,19 +65,21 @@ const getDatesOnSameWeekday = (
 }
 
 /**
- * schedule 정보를 요약한 텍스트로 변환
+ * schedule 객체에서 정보 추출
  * @param {Object[]} schedules 신청서 일정 정보를 담은 객체
  * @param {number} schedules[].day 요일 index. 월요일 0, 일요일 6
+ * @param {number} schedules[].hour 놀이 진행 시간
  * @param {string} schedules[].startDate 시작 날짜
  * @param {string} schedules[].endDate 종료 날짜
  */
-const getScheduleSummary = schedules => {
-  const format = 'M월 D일'
+const getScheduleInfo = schedules => {
   let days = []
+  let totalHour = 0
   let count = 0
   let firstDate = ''
   let lastDate = ''
-  schedules.forEach(({ day, startDate, endDate }) => {
+  schedules.forEach(({ day, hour, startDate, endDate }) => {
+    let tempCount = 0
     if (!days.includes(day)) days.push(day)
 
     if (firstDate === '') firstDate = startDate
@@ -107,16 +90,46 @@ const getScheduleSummary = schedules => {
     else if (moment(lastDate).isBefore(tempLastDate)) lastDate = tempLastDate
 
     if (!endDate) {
-      count += 1
+      tempCount = 1
     } else {
-      count += (moment(endDate).diff(moment(startDate), 'w') + 1)
+      tempCount += (moment(endDate).diff(moment(startDate), 'w') + 1)
     }
+    totalHour += (tempCount * hour)
+    count += tempCount
   })
-  let endDateText = ''
-  if (lastDate !== '') endDateText = ` - ${moment(lastDate).format(format)}`
+
+  return {
+    days,
+    totalHour,
+    count,
+    firstDate,
+    lastDate,
+  }
+}
+
+/**
+ * schedule 정보를 요약한 텍스트로 변환
+ * @param {Object[]} schedules 신청서 일정 정보를 담은 객체
+ * @param {number} schedules[].day 요일 index. 월요일 0, 일요일 6
+ * @param {number} schedules[].hour 놀이 진행 시간
+ * @param {string} schedules[].startDate 시작 날짜
+ * @param {string} schedules[].endDate 종료 날짜
+ */
+const getScheduleSummary = schedules => {
+  const format = 'M월 D일'
+  const {
+    days,
+    count,
+    firstDate,
+    lastDate,
+  } = getScheduleInfo(schedules)
   const text = `${moment(firstDate).format(format)}${endDateText} (총 ${count}회 놀이)`
   const dayText = days.sort((a, b) => a - b).map(item => DAY_LIST[item]).join(',')
   return {
+    days,
+    count,
+    firstDate,
+    lastDate,
     text,
     dayText,
   }
@@ -125,6 +138,7 @@ const getScheduleSummary = schedules => {
 const schedule = {
   getDatesFromSchedules,
   getDatesOnSameWeekday,
+  getScheduleInfo,
   getScheduleSummary
 };
 

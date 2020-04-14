@@ -1,32 +1,19 @@
 const { isValidRank } = require('../lib/validation')
+const { HOURLY_WAGE, SIBLING_HOURLY } = require("../lib/values")
 
-const HOURLY_WAGE_MANUAL = [
-  {
-    A: 12000,
-    B: 10000,
-    C: 8000,
-  },
-  {
-    A: 12500,
-    B: 10500,
-    C: 8500,
-  },
-  {
-    A: 14000,
-    B: 12000,
-    C: 10000,
-  },
-]
-
-const SIBLING_HOURLY_WAGE = 3000
-
+/**
+ * 날짜별 시급 조회
+ * @param {string} type 단발성, 정기권, 체험판 등
+ * @param {string} rank 시터 등급 A, B, C 중 하나
+ * @param {date} date 놀이 진행 날짜
+ */
 const getHourlyWage = (type, rank, date) => {
   let index = 2
   if (moment(date).isBefore('2019-01-01')) index = 0
   else if (moment(date).isBefore('2019-10-01')) index = 1
 
   const index = moment(date).isSameOrAfter('2019-10-01') ? 2 : moment(date).isSameOrBefore('2019-01-01') ? 1 : 0
-  let hourlyWage = HOURLY_WAGE_MANUAL[index][rank]
+  let hourlyWage = HOURLY_WAGE[index][rank]
   if (type === 'S') {
     if (index === 0) {
       hourlyWage = hourlyWage * 1.2
@@ -60,7 +47,7 @@ const getWageForOnePlay = (type, rank, hour, date, sibling) => {
   && typeof hour === 'number'
   && typeof sibling === 'number') {
     const hourlyWage =
-      getHourlyWage(type, rank, date) + sibling * SIBLING_HOURLY_WAGE
+      getHourlyWage(type, rank, date) + sibling * SIBLING_HOURLY
     return hourlyWage * hour
   }
   return 0

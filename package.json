@@ -1,14 +1,17 @@
 {
   "name": "noldam-utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "놀담 개발 통합 모듈",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "author": "pumpa",
   "license": "MIT",
   "dependencies": {
     "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "jest": "^25.3.0"
   }
 }
