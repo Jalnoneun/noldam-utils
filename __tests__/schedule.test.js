@@ -6,20 +6,24 @@ const {
 } = require('../schedule')
 
 describe('schedule funcs', () => {
+  const schedules = [
+    {
+      startDate: '2020-04-13',
+      start: 14,
+      hour: 3.5,
+      day: 0,
+    },
+    {
+      startDate: '2020-04-11',
+      endDate: '2020-04-25',
+      start: 18,
+      hour: 2,
+      day: 5,
+    },
+  ]
+
   test('getDatesFromSchedules', () => {
-    expect(getDatesFromSchedules([
-      {
-        startDate: '2020-04-13',
-        start: 14,
-        hour: 3.5,
-      },
-      {
-        startDate: '2020-04-11',
-        endDate: '2020-04-25',
-        start: 18,
-        hour: 2,
-      },
-    ])).toStrictEqual([
+    expect(getDatesFromSchedules(schedules)).toStrictEqual([
       {
         date: '2020-04-11',
         start: 18,
@@ -53,5 +57,26 @@ describe('schedule funcs', () => {
     expect(getDatesOnSameWeekday('2020-04-10', 3, false)).toStrictEqual([
       '2020-04-17', '2020-04-24', '2020-05-01',
     ])
+  })
+
+  test('getScheduleInfo', () => {
+    expect(getScheduleInfo(schedules)).toStrictEqual({
+      days: [0, 5],
+      totalHour: 9.5,
+      count: 4,
+      firstDate: '2020-04-11',
+      lastDate: '2020-04-25',
+    })
+  })
+
+  test('getScheduleSummary', () => {
+    expect(getScheduleSummary(schedules)).toStrictEqual({
+      days: [0, 5],
+      count: 4,
+      firstDate: '2020-04-11',
+      lastDate: '2020-04-25',
+      text: '4월 11일 - 4월 25일 (총 4회 놀이)',
+      dayText: '월,토',
+    })
   })
 })
