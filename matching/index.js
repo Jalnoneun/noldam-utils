@@ -52,10 +52,21 @@ const calDiscountPrice = (price, discount, hourlyPrice) => {
   return discountPrice
 }
 
+/**
+ * 아이 추가 금액 계산
+ * @param {number} siblings 아이 추가 수
+ * @returns {number} 추가된 아이 수에 따른 금액
+ */
+const calSiblingPrice = siblings => {
+  const siblingPrice = SIBLING_HOURLY * siblings
+  return siblingPrice
+}
+
 const matching = {
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,
+  calSiblingPrice,
 };
 
 (function(root, factory) {
