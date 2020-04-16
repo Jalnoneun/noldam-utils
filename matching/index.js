@@ -2,6 +2,22 @@ const { getScheduleInfo } = require('../schedule')
 const { HOURLY_PRICE, SIBLING_HOURLY } = require("../lib/values")
 
 /**
+ * 시간당 가격 조회
+ * @param {string} rank 시터 등급 A, B, C
+ * @param {number} siblings 아이 추가 수
+ * @returns {Object} 시급 정보
+ */
+const getHourlyPrice = (rank, siblings) => {
+  const price = HOURLY_PRICE[rank]
+  const sibling = SIBLING_HOURLY * siblings
+  return {
+    total: price + sibling,
+    price,
+    sibling,
+  }
+}
+
+/**
  * schedules 객체 배열을 통해 가격 추출
  * @param {Object[]} schedules 일정 정보를 담은 배열
  * @param {number} schedules[].day 요일 index. 월요일 0, 일요일 6
@@ -10,12 +26,16 @@ const { HOURLY_PRICE, SIBLING_HOURLY } = require("../lib/values")
  * @param {string} schedules[].endDate 종료 날짜
  * @param {number} siblings 아이 추가 수
  * @param {string} rank 시터 등급 A, B, C
- * @returns {number} 해당 일정에 따른 금액
+ * @returns {Object} 해당 일정에 따른 금액 정보
  */
 const calPriceForSchedules = (schedules, siblings, rank) => {
   const { totalHour } = getScheduleInfo(schedules)
-  const hourlyPrice = HOURLY_PRICE[rank] + (SIBLING_HOURLY * siblings)
-  return totalHour * hourlyPrice
+  const { total, price, sibling } = getHourlyPrice(rank, siblings)
+  return {
+    total: total * totalHour,
+    price: price  * totalHour,
+    sibling: sibling * totalHour,
+  }
 }
 
 /**
@@ -23,11 +43,15 @@ const calPriceForSchedules = (schedules, siblings, rank) => {
  * @param {number} hour 놀이시간
  * @param {number} siblings 아이 추가 수
  * @param {string} rank 시터 등급 A, B, C
- * @returns {number} 놀이 1회분 금액
+ * @returns {Object} 놀이 1회분 금액 정보
  */
 const calPriceForOnePlay = (hour, siblings, rank) => {
-  const hourlyPrice = HOURLY_PRICE[rank] + SIBLING_HOURLY * siblings
-  return hour * hourlyPrice
+  const { total, price, sibling } = getHourlyPrice(rank, siblings)
+  return {
+    total: total * hour,
+    price: price  * hour,
+    sibling: sibling * hour,
+  }
 }
 
 /**
@@ -53,6 +77,7 @@ const calDiscountPrice = (price, discount, hourlyPrice) => {
 }
 
 const matching = {
+  getHourlyPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,

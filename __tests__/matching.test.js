@@ -5,24 +5,38 @@ const {
 } = require('../matching')
 
 describe('matching funcs', () => {
+  const schedules = [
+    {
+      startDate: '2020-04-13',
+      start: 14,
+      hour: 3.5,
+    },
+    {
+      startDate: '2020-04-11',
+      endDate: '2020-04-25',
+      start: 18,
+      hour: 2,
+    },
+  ]
+
+  test('', () => {
+
+  })
+
   test('calPriceForSchedules', () => {
-    expect(calPriceForSchedules([
-      {
-        startDate: '2020-04-13',
-        start: 14,
-        hour: 3.5,
-      },
-      {
-        startDate: '2020-04-11',
-        endDate: '2020-04-25',
-        start: 18,
-        hour: 2,
-      },
-    ], 0, 'C')).toBe(133000)
+    expect(calPriceForSchedules(schedules, 0, 'C')).toStrictEqual({
+      total: 133000,
+      price: 133000,
+      sibling: 0,
+    })
   })
 
   test('calPriceForOnePlay', () => {
-    expect(calPriceForOnePlay(3, 2, 'B')).toBe(69000)
+    expect(calPriceForOnePlay(3, 2, 'B')).toStrictEqual({
+      total: 69000,
+      price: 51000,
+      sibling: 18000,
+    })
   })
 
   test('calDiscountPrice "amount"', () => {
