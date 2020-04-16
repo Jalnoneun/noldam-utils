@@ -123,7 +123,8 @@ const getScheduleSummary = schedules => {
     firstDate,
     lastDate,
   } = getScheduleInfo(schedules)
-  const text = `${moment(firstDate).format(format)}${lastDate} (총 ${count}회 놀이)`
+  const lastDateText = lastDate ? ` - ${moment(lastDate).format(format)}` : ''
+  const text = `${moment(firstDate).format(format)}${lastDateText} (총 ${count}회 놀이)`
   const dayText = days.sort((a, b) => a - b).map(item => DAY_LIST[item]).join(',')
   return {
     days,
