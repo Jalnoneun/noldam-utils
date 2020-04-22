@@ -44,9 +44,7 @@ const getHourlyWage = (rank, date, type) => {
  * @returns {number}
  */
 const getWageForOnePlay = (rank, hour, sibling, date, type) => {
-  if (isValidRank(rank)
-  && typeof hour === 'number'
-  && typeof sibling === 'number') {
+  if (isValidRank(rank)) {
     const hourlyWage =
       getHourlyWage(rank, date, type) + sibling * SIBLING_HOURLY
     return hourlyWage * hour
