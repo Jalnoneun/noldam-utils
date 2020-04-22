@@ -1,18 +1,29 @@
+const moment = require('moment')
 const { isValidRank } = require('../lib/validation')
 const { HOURLY_WAGE, SIBLING_HOURLY } = require("../lib/values")
 
 /**
+ * 화폐 단위 문자열로 변환
+ * @param {number} price
+ * @returns {string}
+ */
+const toCurrency = price => {
+  if (typeof price !== 'number') return '0'
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+/**
  * 날짜별 시급 조회
- * @param {string} type 단발성, 정기권, 체험판 등
  * @param {string} rank 시터 등급 A, B, C 중 하나
  * @param {date} date 놀이 진행 날짜
+ * @param {string} type 단발성, 정기권, 체험판 등
  */
-const getHourlyWage = (type, rank, date) => {
+const getHourlyWage = (rank, date, type) => {
+  if (!date) date = moment().toDate()
   let index = 2
   if (moment(date).isBefore('2019-01-01')) index = 0
   else if (moment(date).isBefore('2019-10-01')) index = 1
 
-  const index = moment(date).isSameOrAfter('2019-10-01') ? 2 : moment(date).isSameOrBefore('2019-01-01') ? 1 : 0
   let hourlyWage = HOURLY_WAGE[index][rank]
   if (type === 'S') {
     if (index === 0) {
@@ -26,28 +37,18 @@ const getHourlyWage = (type, rank, date) => {
 }
 
 /**
- * 화폐 단위 문자열로 변환
- * @param {number} price
- * @returns {string}
- */
-const toCurrency = price => {
-  if (typeof price !== 'number') return '0'
-  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-}
-
-/**
  * 놀이 1회당 시급
  * @param {string} rank 시터 등급
  * @param {number} hour 놀이 시간
  * @param {number} sibling 형제 추가 옵션
  * @returns {number}
  */
-const getWageForOnePlay = (type, rank, hour, date, sibling) => {
+const getWageForOnePlay = (rank, hour, sibling, date, type) => {
   if (isValidRank(rank)
   && typeof hour === 'number'
   && typeof sibling === 'number') {
     const hourlyWage =
-      getHourlyWage(type, rank, date) + sibling * SIBLING_HOURLY
+      getHourlyWage(rank, date, type) + sibling * SIBLING_HOURLY
     return hourlyWage * hour
   }
   return 0
