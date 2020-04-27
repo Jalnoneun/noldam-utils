@@ -2,6 +2,7 @@ const {
   toCurrency,
   getHourlyWage,
   getWageForOnePlay,
+  getWageForRequest,
 } = require('../wage')
 
 describe('wage funcs', () => {
@@ -9,7 +10,7 @@ describe('wage funcs', () => {
     {
       startDate: '2020-04-13',
       start: 14,
-      hour: 3.5,
+      hour: 4,
     },
     {
       startDate: '2020-04-11',
@@ -45,5 +46,9 @@ describe('wage funcs', () => {
 
   test('getWageForOnePlay 일반 단발성 2018-09-01', () => {
     expect(getWageForOnePlay('C', 4, 2, '2018-09-01', 'S')).toBe(62400)
+  })
+
+  test('getWageForRequest', () => {
+    expect(getWageForRequest(schedules, 'C')).toBe(100000)
   })
 })

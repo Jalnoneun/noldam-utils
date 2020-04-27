@@ -1,6 +1,7 @@
 const moment = require('moment')
 const { isValidRank } = require('../lib/validation')
 const { HOURLY_WAGE, SIBLING_HOURLY } = require("../lib/values")
+const { getScheduleInfo } = require('../schedule')
 
 /**
  * 화폐 단위 문자열로 변환
@@ -52,10 +53,26 @@ const getWageForOnePlay = (rank, hour, sibling, date, type) => {
   return 0
 }
 
+/**
+ * 놀이 전체 시급
+ * @param {string} rank 시터 등급
+ * @param {number} hour 놀이 시간
+ * @param {number} sibling 형제 추가 옵션
+ * @returns {number}
+ */
+const getWageForRequest = (schedules, rank) => {
+  if (isValidRank(rank)) {
+    const { totalHour } = getScheduleInfo(schedules)
+    return getHourlyWage(rank) * totalHour
+  }
+  return 0
+}
+
 const wage = {
   toCurrency,
   getHourlyWage,
   getWageForOnePlay,
+  getWageForRequest,
 };
 
 (function(root, factory) {
