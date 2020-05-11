@@ -12,6 +12,17 @@ const getTimeFromIndex = (index, format = 'A hh:mm') => {
 }
 
 /**
+ * date와 시간 index 값을 통해 Date 형식 반환
+ * @param {string} date 날짜
+ * @param {number} index 0~23.5까지
+ */
+const getDateFromIndex = (date, index) => {
+  const hour = Math.floor(index)
+  const min = index - hour === 0.5 ? 30 : 0
+  return moment(date).hour(hour).minute(min).toDate()
+}
+
+/**
  * 시작 시간부터 종료 시간까지의 표현 방식 반환
  * @param {number} start 시작 시간 index
  * @param {number} hour 놀이 시간
@@ -34,4 +45,5 @@ const fromToTime = (
 }
 
 exports.getTimeFromIndex = getTimeFromIndex
+exports.getDateFromIndex = getDateFromIndex
 exports.fromToTime = fromToTime

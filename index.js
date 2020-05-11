@@ -20,5 +20,3 @@ moment.updateLocale('ko', {
   weekdaysShort: ['일', '월', '화', '수', '목', '금', '토'],
   week: { dow: 1 },
 })
-
-const a = require('./matching')
