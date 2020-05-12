@@ -74,8 +74,8 @@ const calDiscountPrice = (price, discount, hourlyPrice) => {
   } else if (type === 'hour' && hourlyPrice) {
     discountPrice = hourlyPrice * value
   }
-  couponDiscount = Math.ceil(couponDiscount)
-  if (couponDiscount < 0) couponDiscount = 0
+  discountPrice = Math.ceil(discountPrice)
+  if (discountPrice < 0) discountPrice = 0
   return discountPrice
 }
 
