@@ -1,4 +1,5 @@
 const { getScheduleInfo } = require('../schedule')
+const { toCurrency } = require('../wage')
 const { HOURLY_PRICE, SIBLING_HOURLY } = require("../lib/values")
 
 /**
@@ -78,11 +79,25 @@ const calDiscountPrice = (price, discount, hourlyPrice) => {
   return discountPrice
 }
 
+const getDiscountInfo = discount => {
+  const { type, value } = discount
+  let strInfo = ''
+  if (type === 'amount') {
+    strInfo = `${toCurrency(value)}원 할인`
+  } else if (type === 'percent') {
+    strInfo = `${value}% 할인`
+  } else if (type === 'hour') {
+    strInfo = `${value} 시간 무료`
+  }
+  return strInfo
+}
+
 const matching = {
   getHourlyPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,
+  getDiscountInfo,
 };
 
 (function(root, factory) {
