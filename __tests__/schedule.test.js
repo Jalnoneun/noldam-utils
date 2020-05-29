@@ -11,14 +11,14 @@ describe('schedule funcs', () => {
       startDate: '2020-04-13',
       start: 14,
       hour: 3.5,
-      day: 0,
+      day: 1,
     },
     {
       startDate: '2020-04-11',
       endDate: '2020-04-25',
       start: 18,
       hour: 2,
-      day: 5,
+      day: 6,
     },
   ]
 
@@ -61,7 +61,7 @@ describe('schedule funcs', () => {
 
   test('getScheduleInfo', () => {
     expect(getScheduleInfo(schedules)).toStrictEqual({
-      days: [0, 5],
+      days: [1, 6],
       totalHour: 9.5,
       count: 4,
       firstDate: '2020-04-11',
@@ -71,7 +71,7 @@ describe('schedule funcs', () => {
 
   test('getScheduleSummary', () => {
     expect(getScheduleSummary(schedules)).toStrictEqual({
-      days: [0, 5],
+      days: [1, 6],
       count: 4,
       firstDate: '2020-04-11',
       lastDate: '2020-04-25',

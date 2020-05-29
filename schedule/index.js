@@ -1,5 +1,5 @@
 const moment = require('moment')
-const DAY_LIST = ['월', '화', '수', '목', '금', '토', '일']
+const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토']
 
 /**
  * 신청서 일정 정보를 받아 실제 놀이 날짜 목록으로 변환

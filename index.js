@@ -18,5 +18,4 @@ moment.updateLocale('ko', {
     '토요일'
   ],
   weekdaysShort: ['일', '월', '화', '수', '목', '금', '토'],
-  week: { dow: 1 },
 })
