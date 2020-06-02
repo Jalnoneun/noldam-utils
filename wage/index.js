@@ -21,11 +21,14 @@ const toCurrency = price => {
  */
 const getHourlyWage = (rank, date, type) => {
   if (!date) date = moment().toDate()
+
   let index = 2
+
   if (moment(date).isBefore('2019-01-01')) index = 0
   else if (moment(date).isBefore('2019-10-01')) index = 1
 
   let hourlyWage = HOURLY_WAGE[index][rank]
+
   if (type === 'S') {
     if (index === 0) {
       hourlyWage = hourlyWage * 1.2
@@ -60,10 +63,10 @@ const getWageForOnePlay = (rank, hour, sibling, date, type) => {
  * @param {number} sibling 형제 추가 옵션
  * @returns {number}
  */
-const getWageForRequest = (schedules, rank) => {
+const getWageForRequest = (schedules, rank, children) => {
   if (isValidRank(rank)) {
     const { totalHour } = getScheduleInfo(schedules)
-    return getHourlyWage(rank) * totalHour
+    return (getHourlyWage(rank) + (SIBLING_HOURLY * (children.length - 1))) * totalHour
   }
   return 0
 }
