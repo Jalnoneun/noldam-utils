@@ -73,26 +73,38 @@ const getDatesOnSameWeekday = (
  * @param {string} schedules[].endDate 종료 날짜
  */
 const getScheduleInfo = schedules => {
-  let days = []
+  const days = []
   let totalHour = 0
   let count = 0
   let firstDate = ''
   let lastDate = ''
-  schedules.forEach(({ day, hour, startDate, endDate }) => {
+
+  schedules.forEach(({
+    day,
+    hour,
+    startDate, // 임시로 두 가지 경우(camelCase, underBar) 다 수용하기로
+    start_date,
+    endDate,
+    end_date,
+  }) => {
+    const dayStart = startDate || start_date
+    const dayEnd = endDate || end_date
     let tempCount = 0
+
     if (!days.includes(day)) days.push(day)
 
-    if (firstDate === '') firstDate = startDate
-    else if (moment(firstDate).isAfter(startDate)) firstDate = startDate
+    if (firstDate === '') firstDate = dayStart
+    else if (moment(firstDate).isAfter(dayStart)) firstDate = dayStart
 
-    let tempLastDate = !endDate ? startDate : endDate
+    let tempLastDate = !dayEnd ? dayStart : dayEnd
+
     if (lastDate === '') lastDate = tempLastDate
     else if (moment(lastDate).isBefore(tempLastDate)) lastDate = tempLastDate
 
-    if (!endDate) {
+    if (!dayEnd) {
       tempCount = 1
     } else {
-      tempCount += (moment(endDate).diff(moment(startDate), 'w') + 1)
+      tempCount += (moment(dayEnd).diff(moment(dayStart), 'w') + 1)
     }
     totalHour += (tempCount * hour)
     count += tempCount

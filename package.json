@@ -1,6 +1,6 @@
 {
   "name": "noldam-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "놀담 개발 통합 모듈",
   "main": "index.js",
   "scripts": {
