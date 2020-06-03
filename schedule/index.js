@@ -12,21 +12,26 @@ const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토']
  */
 const getDatesFromSchedules = schedules => {
   let dates = []
-  schedules.forEach(({
-    startDate,
-    endDate,
-    start,
-    hour,
-  }) => {
+  schedules.forEach(item => {
+    const {
+      start,
+      hour,
+      startDate, // 임시로 두 가지 경우(camelCase, underBar) 다 수용하기로
+      start_date,
+      endDate,
+      end_date,
+    } = item
+    const sDate = startDate || start_date
+    const eDate = endDate || end_date
     const firstDate = {
-      date: startDate,
+      date: sDate,
       start,
       hour,
     }
     dates.push(firstDate)
-    if (endDate) {
-      let tempDate = moment(startDate)
-      while(tempDate.add(7, 'd').isSameOrBefore(endDate)) {
+    if (eDate) {
+      let tempDate = moment(sDate)
+      while(tempDate.add(7, 'd').isSameOrBefore(eDate)) {
         const date = tempDate.format('YYYY-MM-DD')
         dates.push({
           date,
