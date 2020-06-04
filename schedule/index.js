@@ -24,7 +24,7 @@ const getDatesFromSchedules = schedules => {
     const sDate = startDate || start_date
     const eDate = endDate || end_date
     const firstDate = {
-      date: sDate,
+      date: moment(sDate).format('YYYY-MM-DD'),
       start,
       hour,
     }
@@ -78,14 +78,12 @@ const getDatesOnSameWeekday = (
  * @param {string} schedules[].endDate 종료 날짜
  */
 const getScheduleInfo = schedules => {
-  const days = []
   let totalHour = 0
   let count = 0
   let firstDate = ''
   let lastDate = ''
 
   schedules.forEach(({
-    day,
     hour,
     startDate, // 임시로 두 가지 경우(camelCase, underBar) 다 수용하기로
     start_date,
@@ -94,6 +92,7 @@ const getScheduleInfo = schedules => {
   }) => {
     const dayStart = startDate || start_date
     const dayEnd = endDate || end_date
+    const day = moment(dayStart).day()
     let tempCount = 0
 
     if (!days.includes(day)) days.push(day)
