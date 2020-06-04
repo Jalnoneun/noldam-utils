@@ -78,6 +78,7 @@ const getDatesOnSameWeekday = (
  * @param {string} schedules[].endDate 종료 날짜
  */
 const getScheduleInfo = schedules => {
+  let days = []
   let totalHour = 0
   let count = 0
   let firstDate = ''
