@@ -85,6 +85,7 @@ const getScheduleInfo = schedules => {
   let lastDate = ''
 
   schedules.forEach(({
+    start,
     hour,
     startDate, // 임시로 두 가지 경우(camelCase, underBar) 다 수용하기로
     start_date,
@@ -96,15 +97,17 @@ const getScheduleInfo = schedules => {
     const day = moment(dayStart).day()
     let tempCount = 0
 
+    const getStartTime = date => moment(date).add(start, 'h').format('YYYY-MM-DD H:mm')
+
     if (!days.includes(day)) days.push(day)
 
-    if (firstDate === '') firstDate = dayStart
-    else if (moment(firstDate).isAfter(dayStart)) firstDate = dayStart
+    if (firstDate === '') firstDate = getStartTime(dayStart)
+    else if (moment(firstDate).isAfter(dayStart)) firstDate = getStartTime(dayStart)
 
     let tempLastDate = !dayEnd ? dayStart : dayEnd
 
-    if (lastDate === '') lastDate = tempLastDate
-    else if (moment(lastDate).isBefore(tempLastDate)) lastDate = tempLastDate
+    if (lastDate === '') lastDate = getStartTime(tempLastDate)
+    else if (moment(lastDate).isBefore(tempLastDate)) lastDate = getStartTime(tempLastDate)
 
     if (!dayEnd) {
       tempCount = 1

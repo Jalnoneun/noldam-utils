@@ -49,6 +49,6 @@ describe('wage funcs', () => {
   })
 
   test('getWageForRequest', () => {
-    expect(getWageForRequest(schedules, 'C')).toBe(100000)
+    expect(getWageForRequest(schedules, 'C', 1)).toBe(130000)
   })
 })

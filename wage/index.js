@@ -63,7 +63,7 @@ const getWageForOnePlay = (rank, hour, sibling, date, type) => {
  * @param {number} sibling 형제 추가 옵션
  * @returns {number}
  */
-const getWageForRequest = (schedules, rank, sibling) => {
+const getWageForRequest = (schedules, rank, sibling = 0) => {
   if (isValidRank(rank)) {
     const { totalHour } = getScheduleInfo(schedules)
     return (getHourlyWage(rank) + (SIBLING_HOURLY * sibling)) * totalHour
