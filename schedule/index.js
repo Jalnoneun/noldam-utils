@@ -97,17 +97,17 @@ const getScheduleInfo = schedules => {
     const day = moment(dayStart).day()
     let tempCount = 0
 
-    const getStartTime = date => moment(date).add(start, 'h').format('YYYY-MM-DD H:mm')
+    const setStartTime = date => moment(date).add(start, 'h').format('YYYY-MM-DDTHH:mm:ss')
 
     if (!days.includes(day)) days.push(day)
 
-    if (firstDate === '') firstDate = getStartTime(dayStart)
-    else if (moment(firstDate).isAfter(dayStart)) firstDate = getStartTime(dayStart)
+    if (firstDate === '') firstDate = setStartTime(dayStart)
+    else if (moment(firstDate).isAfter(dayStart)) firstDate = setStartTime(dayStart)
 
     let tempLastDate = !dayEnd ? dayStart : dayEnd
 
-    if (lastDate === '') lastDate = getStartTime(tempLastDate)
-    else if (moment(lastDate).isBefore(tempLastDate)) lastDate = getStartTime(tempLastDate)
+    if (lastDate === '') lastDate = setStartTime(tempLastDate)
+    else if (moment(lastDate).isBefore(tempLastDate)) lastDate = setStartTime(tempLastDate)
 
     if (!dayEnd) {
       tempCount = 1
