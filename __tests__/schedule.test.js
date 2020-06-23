@@ -47,6 +47,21 @@ describe('schedule funcs', () => {
     ])
   })
 
+  test('getDatesFromSchedules - withPartial', () => {
+    expect(getDatesFromSchedules(schedules, ['2020-04-11', '2020-04-18'])).toStrictEqual([
+      {
+        date: '2020-04-11',
+        start: 18,
+        hour: 2,
+      },
+      {
+        date: '2020-04-18',
+        start: 18,
+        hour: 2,
+      },
+    ])
+  })
+
   test('getDatesOnSameWeekday firstDateIncludes=true', () => {
     expect(getDatesOnSameWeekday('2020-04-10', 3, true)).toStrictEqual([
       '2020-04-10', '2020-04-17', '2020-04-24', 
@@ -64,8 +79,8 @@ describe('schedule funcs', () => {
       days: [1, 6],
       totalHour: 9.5,
       count: 4,
-      firstDate: '2020-04-11 18:00',
-      lastDate: '2020-04-25 18:00',
+      firstDate: '2020-04-11T18:00:00',
+      lastDate: '2020-04-25T18:00:00',
     })
   })
 
@@ -73,8 +88,8 @@ describe('schedule funcs', () => {
     expect(getScheduleSummary(schedules)).toStrictEqual({
       days: [1, 6],
       count: 4,
-      firstDate: '2020-04-11 18:00',
-      lastDate: '2020-04-25 18:00',
+      firstDate: '2020-04-11T18:00:00',
+      lastDate: '2020-04-25T18:00:00',
       text: '4월 11일 - 4월 25일 (총 4회 놀이)',
       dayText: '월,토',
     })

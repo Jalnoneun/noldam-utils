@@ -10,7 +10,7 @@ const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토']
  * @param {number} schedules[].hour 놀이 시간
  * @return {Object[]}
  */
-const getDatesFromSchedules = schedules => {
+const getDatesFromSchedules = (schedules, partialDates) => {
   let dates = []
   schedules.forEach(item => {
     const {
@@ -41,6 +41,9 @@ const getDatesFromSchedules = schedules => {
       }
     }
   })
+  if (Array.isArray(partialDates) && partialDates.length > 0) {
+    dates = dates.filter(item => partialDates.includes(item.date))
+  }
   dates = dates.sort((a, b) => moment(a.date).isBefore(b.date) ? -1 : 1)
   return dates
 }
