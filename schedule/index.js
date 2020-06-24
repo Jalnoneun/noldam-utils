@@ -48,6 +48,51 @@ const getDatesFromSchedules = (schedules, partialDates) => {
   return dates
 }
 
+
+/**
+ * 놀이날짜 정보를 받아 스케줄 목록으로 변경
+ * @param {Object} dates 
+ * @param {string} dates[].date 종료 날짜
+ * @param {number} dates[].start 시작 시간 index
+ * @param {number} dates[].hour 놀이 시간
+ */
+const getSchedulesFromDates = dates => {
+  const format = 'YYYY-MM-DD'
+  let tempDates = [...dates].sort((a, b) => moment(a.date).isBefore(moment(b.date)) ? -1 : 1)
+  const onlyDateList = tempDates.map(item => moment(item.date).format(format))
+  let includedDate = []
+  let schedules = []
+  tempDates.forEach(item => {
+    let tempDate = moment(item.date)
+    if (includedDate.includes(tempDate.format(format))) {
+      return
+    }
+    let repeatList = []
+    while(onlyDateList.includes(tempDate.format(format))) {
+      repeatList.push({
+        ...item,
+        date: tempDate.format(format)
+      })
+      includedDate.push(tempDate.format(format))
+      tempDate.add(1, 'w')
+    }
+    if (repeatList.length === 0) {
+      return
+    }
+    let schedule = { 
+        start: item.start,
+        hour: item.hour,
+        start_date: repeatList[0].date,
+     }
+    if (repeatList.length > 1) {
+      schedule.end_date = repeatList[repeatList.length - 1].date
+    }
+    schedules.push(schedule)
+  })
+  return schedules
+}
+
+
 /**
  * 시작 날짜를 기점으로 같은 요일의 날짜 목록을 반환
  * @param {string} date 시작 날짜
@@ -161,6 +206,7 @@ const getScheduleSummary = schedules => {
 
 const schedule = {
   getDatesFromSchedules,
+  getSchedulesFromDates,
   getDatesOnSameWeekday,
   getScheduleInfo,
   getScheduleSummary

@@ -1,5 +1,6 @@
 const {
   getDatesFromSchedules,
+  getSchedulesFromDates,
   getDatesOnSameWeekday,
   getScheduleInfo,
   getScheduleSummary
@@ -94,4 +95,67 @@ describe('schedule funcs', () => {
       dayText: '월,토',
     })
   })
+
+  const dateToScheduleSample = [
+    {
+      date: '2020-06-26',
+      start: 0,
+      hour: 2,
+    },
+    {
+      date: '2020-06-19',
+      start: 0,
+      hour: 2,
+    },
+    {
+      date: '2020-06-12',
+      start: 0,
+      hour: 2,
+    },
+    {
+      date: '2020-05-29',
+      start: 0,
+      hour: 2,
+    },
+    {
+      date: '2020-06-02',
+      start: 0,
+      hour: 2,
+    },
+    {
+      date: '2020-06-09',
+      start: 0,
+      hour: 2,
+    },
+    {
+      date: '2020-06-23',
+      start: 0,
+      hour: 2,
+    },
+    
+    {
+      date: '2020-06-30',
+      start: 0,
+      hour: 2,
+    }
+  ]
+
+  test('scheduleToDateSample', () => {
+    expect(getSchedulesFromDates(dateToScheduleSample)).toStrictEqual([ 
+      { start: 0, hour: 2, start_date: '2020-05-29' },
+      { start: 0,
+        hour: 2,
+        start_date: '2020-06-02',
+        end_date: '2020-06-09' },
+      { start: 0,
+        hour: 2,
+        start_date: '2020-06-12',
+        end_date: '2020-06-26' },
+      { start: 0,
+        hour: 2,
+        start_date: '2020-06-23',
+        end_date: '2020-06-30' } 
+      ])
+  })
+
 })
