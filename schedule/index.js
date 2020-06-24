@@ -92,10 +92,11 @@ const getScheduleInfo = schedules => {
     hour,
     startDate, // 임시로 두 가지 경우(camelCase, underBar) 다 수용하기로
     start_date,
+    date,
     endDate,
     end_date,
   }) => {
-    const dayStart = startDate || start_date
+    const dayStart = startDate || start_date || date
     const dayEnd = endDate || end_date
     const day = moment(dayStart).day()
     let tempCount = 0
