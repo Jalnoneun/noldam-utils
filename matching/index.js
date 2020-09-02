@@ -113,7 +113,7 @@ const getTotalPrice = (schedules, params) => {
   return hourlyWage * totalHour
 }
 
-const getItemName = (schedules, params) => {
+const getOrderName = (schedules, params) => {
   const {
     childCount,
     category,
@@ -256,7 +256,7 @@ const getDiscountInfo = discount => {
 const matching = {
   getUnitPrice,
   getTotalPrice,
-  getItemName,
+  getOrderName,
   getHourlyPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
