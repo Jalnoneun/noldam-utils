@@ -3,6 +3,98 @@ const { isValidRank } = require('../lib/validation')
 const { HOURLY_WAGE, SIBLING_HOURLY } = require("../lib/values")
 const { getScheduleInfo } = require('../schedule')
 
+const getUnitWage = ({
+  childCount,
+  category,
+  special,
+  rank,
+}) => {
+  if (childCount < 1) {
+    throw new Error('아이 수 오류')
+  }
+  if (category === 'one') {
+    if (special === 'booktalk') {
+      // 북토크
+      const baseWage = 10000
+      const extra = 3000 * (childCount - 1)
+      const hourlyWage = baseWage + extra
+
+      return hourlyWage
+
+    } else {
+      const baseWage = HOURLY_WAGE[2][rank]
+      const extra = 3000 * (childCount - 1)
+      const hourlyWage = baseWage + extra
+
+      return hourlyWage
+
+    }
+  } else if (category === 'group') {
+    if (special === 'tri_cooking' || special === 'tri_mongcle') {
+      const baseWage = 14000
+      const extra = 3000 * (childCount - 1)
+      const hourlyWage = baseWage + extra
+
+      return hourlyWage
+
+    } else if (special === 'town') {
+      // 동네탐구생활
+      const baseWage = 10000
+      const extra = 3000 * (childCount - 1)
+      const hourlyWage = baseWage + extra
+
+      return hourlyWage
+
+    } else if (special === 'shhport') {
+      // 쉿포츠
+      const baseWage = 14000
+      const extra = 6000 * (childCount - 1)
+      const hourlyWage = baseWage + extra
+
+      return hourlyWage
+    }
+  } else if (category === 'with') {
+    if (special === '_') {
+      
+    } else {
+      const baseWage = 10000
+      const extra = 3000 * (childCount - 1)
+      const hourlyWage = baseWage + extra
+
+      return hourlyWage
+    }
+  }
+
+  throw new Error('잘못된 분류입니다.')
+}
+
+/**
+ * 놀이 전체 시급
+ * 적절한 형태가 입력되지 않은 경우 오류 발생
+ * @param {object} schedule 일정
+ * @param {string} rank 시터 등급
+ * @param {number} category 대분류
+ * @param {number} childCount 아이 수
+ * @param {number} special 클래스
+ * @returns {number}
+ */
+const getTotalWage = (schedules, params) => {
+  const {
+    childCount,
+    category,
+    special,
+    rank
+  } = params
+  const { totalHour } = getScheduleInfo(schedules)
+  const hourlyWage = getUnitWage({
+    childCount,
+    category,
+    special,
+    rank,
+  })
+  return hourlyWage * totalHour
+}
+
 /**
  * 화폐 단위 문자열로 변환
  * @param {number} price
@@ -58,8 +150,8 @@ const getWageForOnePlay = (rank, hour, sibling, date, type) => {
 
 /**
  * 놀이 전체 시급
+ * @param {object} schedule 일정
  * @param {string} rank 시터 등급
- * @param {number} hour 놀이 시간
  * @param {number} sibling 형제 추가 옵션
  * @returns {number}
  */
@@ -72,13 +164,15 @@ const getWageForRequest = (schedules, rank, sibling = 0) => {
 }
 
 const wage = {
+  getUnitWage,
+  getTotalWage,
   toCurrency,
   getHourlyWage,
   getWageForOnePlay,
   getWageForRequest,
-};
+}
 
-(function(root, factory) {
+;(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD
     define(['wage'], factory)

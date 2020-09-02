@@ -3,10 +3,20 @@ const {
   getHourlyWage,
   getWageForOnePlay,
   getWageForRequest,
+  getTotalWage,
 } = require('../wage')
+const { getUnitPrice } = require('../matching')
 
 describe('wage funcs', () => {
   const schedules = [
+    {
+      startDate: '2020-04-13',
+      start: 14,
+      hour: 2,
+    }
+  ]
+
+  const schedules2 = [
     {
       startDate: '2020-04-13',
       start: 14,
@@ -22,6 +32,38 @@ describe('wage funcs', () => {
 
   test('toCurrency', () => {
     expect(toCurrency(1234000)).toBe('1,234,000')
+  })
+
+  test('getTotalWage', () => {
+    expect(getTotalWage(schedules, {
+      childCount: 3,
+      category: 'one',
+      rank: 'A',
+    })).toBe(40000)
+  })
+
+  test('getTotalWage', () => {
+    expect(getTotalWage(schedules, {
+      childCount: 2,
+      category: 'group',
+      special: 'shhport',
+    })).toBe(40000)
+  })
+
+  test('getTotalWage', () => {
+    expect(getTotalWage(schedules, {
+      childCount: 1,
+      category: 'with',
+      special: 'sk_2005',
+    })).toBe(20000)
+  })
+
+  test('getTotalWage', () => {
+    expect(getTotalWage(schedules, {
+      childCount: 1,
+      category: 'with',
+      special: 'sk_2005',
+    })).toBe(20000)
   })
 
   test('getHourlyWage 전문 현재', () => {
@@ -49,6 +91,10 @@ describe('wage funcs', () => {
   })
 
   test('getWageForRequest', () => {
-    expect(getWageForRequest(schedules, 'C', 1)).toBe(130000)
+    expect(getWageForRequest(schedules2, 'C', 1)).toBe(130000)
+  })
+
+  test('getWageForRequest', () => {
+    expect(getWageForRequest(schedules2, 'C', 1)).toBe(130000)
   })
 })

@@ -52,9 +52,9 @@ const getDatesFromSchedules = (schedules, partialDates) => {
 /**
  * 놀이날짜 정보를 받아 스케줄 목록으로 변경
  * @param {Object} dates 
- * @param {string} dates[].date 종료 날짜
- * @param {number} dates[].start 시작 시간 index
- * @param {number} dates[].hour 놀이 시간
+ * @param {string} dates.date 종료 날짜
+ * @param {number} dates.start 시작 시간 index
+ * @param {number} dates.hour 놀이 시간
  */
 const getSchedulesFromDates = dates => {
   const format = 'YYYY-MM-DD'
