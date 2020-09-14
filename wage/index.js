@@ -5,67 +5,64 @@ const { getScheduleInfo } = require('../schedule')
 
 const getUnitWage = ({
   childCount,
-  category,
   special,
   rank,
 }) => {
   if (childCount < 1) {
     throw new Error('아이 수 오류')
   }
-  if (category === 'one') {
-    if (special === 'booktalk') {
-      // 북토크
-      const baseWage = 10000
-      const extra = 3000 * (childCount - 1)
-      const hourlyWage = baseWage + extra
 
-      return hourlyWage
+  if (!special) {
+    const baseWage = HOURLY_WAGE[2][rank]
+    const extra = 3000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
 
-    } else {
-      const baseWage = HOURLY_WAGE[2][rank]
-      const extra = 3000 * (childCount - 1)
-      const hourlyWage = baseWage + extra
+    return hourlyWage
+  }
+  
+  if (special === 'booktalk') {
+    // 북토크
+    const baseWage = 10000
+    const extra = 3000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
 
-      return hourlyWage
+    return hourlyWage
 
-    }
-  } else if (category === 'group') {
-    if (special === 'tri_cooking' || special === 'tri_mongcle') {
-      const baseWage = 14000
-      const extra = 3000 * (childCount - 1)
-      const hourlyWage = baseWage + extra
+  } else if (special === 'tri_cooking'
+  || special === 'tri_mongcle'
+  || special === 'tri_simda') {
+    const baseWage = 14000
+    const extra = 3000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
 
-      return hourlyWage
+    return hourlyWage
 
-    } else if (special === 'town') {
-      // 동네탐구생활
-      const baseWage = 10000
-      const extra = 3000 * (childCount - 1)
-      const hourlyWage = baseWage + extra
+  } else if (special === 'town') {
+    // 동네탐구생활
+    const baseWage = 10000
+    const extra = 3000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
 
-      return hourlyWage
+    return hourlyWage
 
-    } else if (special === 'shhport') {
-      // 쉿포츠
-      const baseWage = 14000
-      const extra = 6000 * (childCount - 1)
-      const hourlyWage = baseWage + extra
+  } else if (special === 'shhport') {
+    // 쉿포츠
+    const baseWage = 14000
+    const extra = 6000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
 
-      return hourlyWage
-    }
-  } else if (category === 'with') {
-    if (special === '_') {
-      
-    } else {
-      const baseWage = 10000
-      const extra = 3000 * (childCount - 1)
-      const hourlyWage = baseWage + extra
+    return hourlyWage
+  } else if (special.includes('sk_')
+  || special.includes('jongno_')
+  || special.includes('hungry_')) {
+    const baseWage = 10000
+    const extra = 3000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
 
-      return hourlyWage
-    }
+    return hourlyWage
   }
 
-  throw new Error('잘못된 분류입니다.')
+  throw new Error('잘못된 분류입니다')
 }
 
 /**
