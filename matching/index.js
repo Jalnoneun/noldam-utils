@@ -65,6 +65,19 @@ const getUnitPrice = ({
     }
 
     return hourlyPrice
+  } else if (special === 'tri_simda') {
+    // 삼총사 심다 클래스 - 2시간 고정
+
+    let hourlyPrice = null
+    if (childCount === 3) {
+      hourlyPrice = 67500
+    } else if (childCount === 2) {
+      hourlyPrice = 65000
+    } else if (childCount === 1) {
+      hourlyPrice = 60000
+    }
+
+    return hourlyPrice
   } else if (special === 'town') {
     // 동네탐구생활
     let hourlyPrice = childCount === 1 ? 14000 : 10000 * childCount
