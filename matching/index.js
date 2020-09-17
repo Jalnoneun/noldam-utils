@@ -12,11 +12,14 @@ const getUnitPrice = ({
 }) => {
   if (!special) {
     const hourlyPrice = HOURLY_PRICE[rank] + 3000 * (childCount - 1)
-    console.log(HOURLY_PRICE[rank])
-    console.log(childCount)
     return hourlyPrice
   }
-  if (special === 'booktalk') {
+
+  if (special === 'kidop') {
+    let hourlyPrice = 0
+
+    return hourlyPrice
+  } else if (special === 'booktalk') {
     let hourlyPrice = 16000
 
     return hourlyPrice
@@ -137,6 +140,8 @@ const getOrderName = (schedules, params) => {
     return `놀담 학습도우미 ${totalHour}시간`
   } else if (special === 'booktalk') {
     return `온라인 북토크 ${totalHour}시간`
+  } else if (special === 'kidop') {
+    return `키돕 ${totalHour}시간`
   } else if (special === 'tri_cooking') {
     let strChildOption = ''
     if (childCount !== 3) strChildOption = `(${childCount}인)`
@@ -145,6 +150,10 @@ const getOrderName = (schedules, params) => {
     let strChildOption = ''
     if (childCount !== 3) strChildOption = `(${childCount}인)`
     return `삼총사 클래스 클레이 아트편 ${totalHour}시간${strChildOption}`
+  } else if (special === 'tri_simda') {
+    let strChildOption = ''
+    if (childCount !== 3) strChildOption = `(${childCount}인)`
+    return `삼총사 클래스 가드닝편 ${totalHour}시간${strChildOption}`
   } else if (special === 'town') {
     let strChildOption = ''
     if (childCount !== 2) strChildOption = `(${childCount}인)`

@@ -19,15 +19,20 @@ const getUnitWage = ({
 
     return hourlyWage
   }
-  
-  if (special === 'booktalk') {
+
+  if (special === 'kidop') {
+    const hourlyWage = 14000
+
+    return hourlyWage
+
+  } else if (special === 'booktalk') {
     // 북토크
     const baseWage = 10000
     const extra = 3000 * (childCount - 1)
     const hourlyWage = baseWage + extra
 
     return hourlyWage
-
+    
   } else if (special === 'tri_cooking'
   || special === 'tri_mongcle'
   || special === 'tri_simda') {
