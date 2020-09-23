@@ -94,9 +94,9 @@ const getUnitPrice = ({
     }
 
     return hourlyPrice
-  } else if (special.includes('sk_')
-  || special.includes('jongno_')
-  || special.includes('hungry_')) {
+  } else if (special.includes('sk')
+  || special.includes('jongno')
+  || special.includes('hungry')) {
 
     return 0
   }
