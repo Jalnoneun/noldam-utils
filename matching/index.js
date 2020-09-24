@@ -81,6 +81,21 @@ const getUnitPrice = ({
     }
 
     return hourlyPrice
+  } else if (special === 'tri_cooking2') {
+    // 삼총사 피나포레2 - 2시간 고정
+
+    if (childCount < 2 || childCount > 3) {
+      throw new Error('[childCount] 아이 수는 2명에서 3명까지만 가능합니다.')
+    }
+
+    let hourlyPrice = null
+    if (childCount === 3) {
+      hourlyPrice = 49500
+    } else if (childCount === 2) {
+      hourlyPrice = 46500
+    }
+
+    return hourlyPrice
   } else if (special === 'town') {
     // 동네탐구생활
     let hourlyPrice = childCount === 1 ? 14000 : 10000 * childCount
