@@ -12,7 +12,9 @@ const getUnitWage = ({
     throw new Error('아이 수 오류')
   }
 
-  if (!special) {
+  if (!special
+    || special === 'normal'
+    || special === 'tutor') {
     const baseWage = HOURLY_WAGE[2][rank]
     const extra = 3000 * (childCount - 1)
     const hourlyWage = baseWage + extra
