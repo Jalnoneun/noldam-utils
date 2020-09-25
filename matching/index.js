@@ -10,7 +10,10 @@ const getUnitPrice = ({
   option2,
   option3,
 }) => {
-  if (!special) {
+  if (!special
+    || special === 'normal'
+    || special === 'tutor'
+    || special === 'homecoming') {
     const hourlyPrice = HOURLY_PRICE[rank] + 3000 * (childCount - 1)
     return hourlyPrice
   }
@@ -23,6 +26,24 @@ const getUnitPrice = ({
     let hourlyPrice = 16000
 
     return hourlyPrice
+  } else if (special === 'neighborhood') {
+    // 동네돌봄 일상
+    if (childCount < 2 || childCount > 5) {
+      throw new Error('[childCount] 참여 아이 수 오류 2~5명까지 가능')
+    }
+    let hourlyPrice = null
+    if (childCount === 2) {
+      hourlyPrice = 26000
+    } else if (childCount === 3) {
+      hourlyPrice = 30000
+    } else if (childCount === 4) {
+      hourlyPrice = 38000
+    } else if (childCount === 5) {
+      hourlyPrice = 44000
+    }
+
+    return hourlyPrice
+
   } else if (special === 'tri_cooking') {
     // 삼총사 쿠킹 클래스 - 2시간 고정
     // option1: option1 -> A타입, B타입 2가지 타입 각각 A타입: 0, B타입: 1
