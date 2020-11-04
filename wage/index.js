@@ -38,8 +38,8 @@ const getUnitWage = ({
     
   } else if (special === 'neighborhood') {
     // 동네돌봄 일상
-    if (childCount < 2) {
-      throw new Error('[childCount] 참여 아이 수 오류 2명 이상 가능')
+    if (childCount < 2 || childCount > 5) {
+      throw new Error('[childCount] 참여 아이 수 오류 2~5명까지 가능')
     }
     const baseWage = 10000
     const extra = 3000 * (childCount - 1)
@@ -70,6 +70,14 @@ const getUnitWage = ({
     const hourlyWage = baseWage + extra
 
     return hourlyWage
+  } else if (special === 'makingBox') {
+    // 뚝딱 메이킹 박스
+    const baseWage = 10000
+    const extra = 3000 * (childCount - 1)
+    const hourlyWage = baseWage + extra
+
+    return hourlyWage
+
   } else if (special.includes('sk')
   || special.includes('jongno')
   || special.includes('hungry')) {
