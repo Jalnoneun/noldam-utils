@@ -4,7 +4,7 @@ const categoryTitle = {
   with: '함께돌봄'
 }
 
-const specialTitle = {
+const programTitle = {
   kidop: '키돕',
   booktalk: '북토크',
   tutor: '놀담학습도우미',
