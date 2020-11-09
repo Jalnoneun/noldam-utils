@@ -130,7 +130,7 @@ const getUnitPrice = ({
     }
 
     return hourlyPrice
-  } else if (special === 'makingBox') {
+  } else if (special === 'makingbox') {
     // 뚝딱 메이킹 박스 - 2시간 고정
     // option1: option1 -> A타입, B타입 2가지 타입 각각 A타입: 0, B타입: 1
 

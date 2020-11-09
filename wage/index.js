@@ -70,7 +70,7 @@ const getUnitWage = ({
     const hourlyWage = baseWage + extra
 
     return hourlyWage
-  } else if (special === 'makingBox') {
+  } else if (special === 'makingbox') {
     // 뚝딱 메이킹 박스
     const baseWage = 10000
     const extra = 3000 * (childCount - 1)

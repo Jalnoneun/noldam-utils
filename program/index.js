@@ -16,7 +16,7 @@ const programTitle = {
   shhport: '쉿포츠',
   sk_2005: 'SK 함께돌봄',
   homecoming: '하원도우미',
-  makingBox: '뚝딱 메이킹 박스',
+  makingbox: '뚝딱 메이킹 박스',
 }
 
 const programOptions = {
@@ -64,7 +64,7 @@ const programOptions = {
       text: '네이처 클레이',
     },
   ],
-  makingBox: [
+  makingbox: [
     {
       value: 0,
       text: '탐험가 박스',
