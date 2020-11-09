@@ -67,11 +67,15 @@ const programOptions = {
   makingBox: [
     {
       value: 0,
-      text: '도우 페인팅',
+      text: '탐험가 박스',
     },
     {
       value: 1,
-      text: '마이 컬러',
+      text: '여행가 박스',
+    },
+    {
+      value: 2,
+      text: '우주인 박스',
     },
   ],
 }
