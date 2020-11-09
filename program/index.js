@@ -64,6 +64,20 @@ const programOptions = {
       text: '네이처 클레이',
     },
   ],
+  tri_cooking2: [
+    {
+      value: 0,
+      text: '마쉬멜로우 초콜릿 팝',
+    },
+    {
+      value: 1,
+      text: '몬스터 컵 케이크',
+    },
+    {
+      value: 2,
+      text: 'M&M 초콜릿 쿠키',
+    },
+  ],
   makingbox: [
     {
       value: 0,
