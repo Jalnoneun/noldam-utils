@@ -17,7 +17,7 @@ const getUnitWage = ({
     || special === 'tutor'
     || special === 'homecoming') {
     const baseWage = HOURLY_WAGE[2][rank]
-    const extra = 3000 * (childCount - 1)
+    const extra = SIBLING_HOURLY * (childCount - 1)
     const hourlyWage = baseWage + extra
 
     return hourlyWage
@@ -171,28 +171,12 @@ const getWageForOnePlay = (rank, hour, sibling, date, type) => {
   return 0
 }
 
-/**
- * 놀이 전체 시급
- * @param {object} schedule 일정
- * @param {string} rank 시터 등급
- * @param {number} sibling 형제 추가 옵션
- * @returns {number}
- */
-const getWageForRequest = (schedules, rank, sibling = 0) => {
-  if (isValidRank(rank)) {
-    const { totalHour } = getScheduleInfo(schedules)
-    return (getHourlyWage(rank) + (SIBLING_HOURLY * sibling)) * totalHour
-  }
-  return 0
-}
-
 const wage = {
   getUnitWage,
   getTotalWage,
   toCurrency,
   getHourlyWage,
   getWageForOnePlay,
-  getWageForRequest,
 }
 
 ;(function(root, factory) {
