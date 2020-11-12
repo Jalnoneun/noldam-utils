@@ -134,23 +134,28 @@ const getUnitPrice = ({
     // 뚝딱 메이킹 박스 - 2시간 고정
     // option1: option1 -> A타입, B타입 2가지 타입 각각 A타입: 0, B타입: 1
 
-    const condition1 = option1 === 0 && [1, 2, 3].includes(childCount)
-    const condition2 = option1 === 1 && childCount === 1
-    if (!condition1 && !condition2) {
+    const condition = [0, 1, 2].includes(option1) && [1, 2, 3].includes(childCount)
+    if (!condition) {
       throw new Error(`[옵션 오류] 옵션1: ${option1} / 아이 수: ${childCount}`)
     }
 
     let hourlyPrice = null
-    if (option1 === 0) {
+    if (option1 === 2) {
+      if (childCount === 1) {
+        hourlyPrice = 30000
+      } else if (childCount === 2) {
+        hourlyPrice = 47500
+      } else if (childCount === 3) {
+        hourlyPrice = 65000
+      }
+    } else {
       if (childCount === 1) {
         hourlyPrice = 27500
       } else if (childCount === 2) {
         hourlyPrice = 42500
       } else if (childCount === 3) {
-        hourlyPrice = 55000
+        hourlyPrice = 57500
       }
-    } else if (option1 === 1) {
-      hourlyPrice = 60000
     }
 
     return hourlyPrice
