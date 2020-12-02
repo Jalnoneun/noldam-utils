@@ -12,6 +12,7 @@ const programTitle = {
   tri_cooking2: '삼총사 - 피나포레 2탄',
   tri_mongcle: '삼총사 - 몽클',
   tri_simda: '삼총사 - 심다',
+  tri_xmas: '삼총사 - 크리스마스',
   town: '동네탐구생활',
   shhport: '쉿포츠',
   sk_2005: 'SK 함께돌봄',
@@ -76,6 +77,16 @@ const programOptions = {
     {
       value: 2,
       text: 'M&M 초콜릿 쿠키',
+    },
+  ],
+  tri_xmas: [
+    {
+      value: 0,
+      text: '트리 마을',
+    },
+    {
+      value: 1,
+      text: '위시 오르골',
     },
   ],
   makingbox: [

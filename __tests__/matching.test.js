@@ -1,4 +1,5 @@
 const {
+  getTotalPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,
@@ -19,8 +20,30 @@ describe('matching funcs', () => {
     },
   ]
 
-  test('', () => {
+  const hour2_schedules = [
+    {
+      startDate: '2020-04-11',
+      start: 18,
+      hour: 2,
+    },
+  ]
 
+  test('getTotalPrice - tri_cooking', () => {
+    expect(getTotalPrice(hour2_schedules, {
+      childCount: 3,
+      category: 'group',
+      special: 'tri_cooking',
+      option1: 0,
+    })).toBe(105000)
+  })
+
+  test('getTotalPrice - tri_xmas', () => {
+    expect(getTotalPrice(hour2_schedules, {
+      childCount: 3,
+      category: 'group',
+      special: 'tri_xmas',
+      option1: 0,
+    })).toBe(96000)
   })
 
   test('calPriceForSchedules', () => {
