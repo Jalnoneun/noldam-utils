@@ -126,11 +126,11 @@ const getUnitPrice = ({
 
     let hourlyPrice = null
     if (childCount === 1) {
-      hourlyPrice = option === 0 ? 32000 : 38500
+      hourlyPrice = option1 === 0 ? 32000 : 38500
     } else if  (childCount === 2) {
-      hourlyPrice = option === 0 ? 42000 : 45000
+      hourlyPrice = option1 === 0 ? 42000 : 45000
     } else if  (childCount === 3) {
-      hourlyPrice = option === 0 ? 48000 : 57000
+      hourlyPrice = option1 === 0 ? 48000 : 57000
     }
 
     return hourlyPrice
