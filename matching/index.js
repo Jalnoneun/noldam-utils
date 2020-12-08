@@ -120,15 +120,17 @@ const getUnitPrice = ({
   } else if (special === 'tri_xmas') {
     // 삼총사 크리스마스 - 2시간 고정
 
-    if (childCount < 2 || childCount > 3) {
-      throw new Error('[childCount] 아이 수는 2명에서 3명까지만 가능합니다.')
+    if (childCount < 1 || childCount > 3) {
+      throw new Error('[childCount] 아이 수는 1명에서 3명까지만 가능합니다.')
     }
 
     let hourlyPrice = null
-    if (option1 === 0) {
-      hourlyPrice = childCount === 3 ? 48000 : 42000
-    } else if (option1 === 1) {
-      hourlyPrice = childCount === 3 ? 57000 : 45000
+    if (childCount === 1) {
+      hourlyPrice = option === 0 ? 32000 : 38500
+    } else if  (childCount === 2) {
+      hourlyPrice = option === 0 ? 42000 : 45000
+    } else if  (childCount === 3) {
+      hourlyPrice = option === 0 ? 48000 : 57000
     }
 
     return hourlyPrice
