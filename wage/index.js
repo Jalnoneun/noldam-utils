@@ -80,8 +80,11 @@ const getUnitWage = ({
     return hourlyWage
 
   } else if (special.includes('sk')
-  || special.includes('jongno')
-  || special.includes('hungry')) {
+    || special.includes('jongno')
+    || special.includes('hungry')
+    || special.includes('wadiz')
+    || special.includes('posco')
+  ) {
     const baseWage = 10000
     const extra = 3000 * (childCount - 1)
     const hourlyWage = baseWage + extra

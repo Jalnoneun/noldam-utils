@@ -177,8 +177,11 @@ const getUnitPrice = ({
 
     return hourlyPrice
   } else if (special.includes('sk')
-  || special.includes('jongno')
-  || special.includes('hungry')) {
+    || special.includes('jongno')
+    || special.includes('hungry')
+    || special.includes('wadiz')
+    || special.includes('posco')
+  ) {
 
     return 0
   }
