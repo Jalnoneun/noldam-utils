@@ -18,6 +18,8 @@ const programTitle = {
   sk_2005: 'SK 함께돌봄',
   homecoming: '하원도우미',
   makingbox: '뚝딱 메이킹 박스',
+  wadiz: '와디즈',
+  posco: '포스코',
 }
 
 const programOptions = {
