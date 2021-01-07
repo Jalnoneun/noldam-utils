@@ -1,5 +1,6 @@
 const {
   getTotalPrice,
+  getUnitPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,
@@ -27,6 +28,20 @@ describe('matching funcs', () => {
       hour: 2,
     },
   ]
+
+  test('getUnitPrice', () => {
+    expect(getUnitPrice({
+      childCount: 3,
+      rank: 'A'
+    })).toBe(26000)
+  })
+
+  test('getUnitPrice - ignoreChildCount', () => {
+    expect(getUnitPrice({
+      childCount: 3,
+      rank: 'A'
+    }, true)).toBe(20000)
+  })
 
   test('getTotalPrice - tri_cooking', () => {
     expect(getTotalPrice(hour2_schedules, {

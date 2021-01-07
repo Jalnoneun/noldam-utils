@@ -2,14 +2,17 @@ const { getScheduleInfo } = require('../schedule')
 const { toCurrency } = require('../wage')
 const { HOURLY_PRICE, SIBLING_HOURLY } = require("../lib/values")
 
-const getUnitPrice = ({
-  childCount,
-  special,
-  rank,
-  option1,
-  option2,
-  option3,
-}) => {
+const getUnitPrice = (params, ignoreChildCount = false) => {
+  const {
+    special,
+    rank,
+    option1,
+    option2,
+    option3,
+  } = params
+  
+  const childCount = ignoreChildCount ? 1 : params.childCount
+
   if (!special
     || special === 'normal'
     || special === 'tutor'
