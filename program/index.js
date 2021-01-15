@@ -13,6 +13,7 @@ const programTitle = {
   tri_mongcle: '삼총사 - 몽클',
   tri_simda: '삼총사 - 심다',
   tri_xmas: '삼총사 - 크리스마스',
+  tri_newyear: '삼총사 - 소소한 새해맞이',
   town: '동네탐구생활',
   shhport: '쉿포츠',
   sk_2005: 'SK 함께돌봄',
@@ -89,6 +90,16 @@ const programOptions = {
     {
       value: 1,
       text: '위시 오르골',
+    },
+  ],
+  tri_newyear: [
+    {
+      value: 0,
+      text: '옛과자 강정',
+    },
+    {
+      value: 1,
+      text: '옛놀이 상자',
     },
   ],
   makingbox: [

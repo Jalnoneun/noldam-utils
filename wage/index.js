@@ -45,11 +45,7 @@ const getUnitWage = ({
     const extra = 3000 * (childCount - 1)
     const hourlyWage = baseWage + extra
     return hourlyWage
-  } else if (special === 'tri_cooking'
-  || special === 'tri_mongcle'
-  || special === 'tri_simda'
-  || special === 'tri_cooking2'
-  || special === 'tri_xmas') {
+  } else if (special.includes('tri_')) {
     const baseWage = 14000
     const extra = 3000 * (childCount - 1)
     const hourlyWage = baseWage + extra

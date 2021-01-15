@@ -137,6 +137,23 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
     }
 
     return hourlyPrice
+  } else if (special === 'tri_newyear') {
+    // 삼총사 소소한 새해맞이 - 2시간 고정
+
+    if (childCount < 1 || childCount > 3) {
+      throw new Error('[childCount] 아이 수는 1명에서 3명까지만 가능합니다.')
+    }
+    
+    let hourlyPrice = null
+    if (childCount === 1) {
+      hourlyPrice = option1 === 0 ? 31000 : 31000
+    } else if  (childCount === 2) {
+      hourlyPrice = option1 === 0 ? 34000 : 44000
+    } else if  (childCount === 3) {
+      hourlyPrice = option1 === 0 ? 39000 : 57000
+    }
+
+    return hourlyPrice
   } else if (special === 'town') {
     // 동네탐구생활
     let hourlyPrice = childCount === 1 ? 14000 : 10000 * childCount

@@ -61,6 +61,15 @@ describe('matching funcs', () => {
     })).toBe(96000)
   })
 
+  test('getTotalPrice - tri_newyear', () => {
+    expect(getTotalPrice(hour2_schedules, {
+      childCount: 2,
+      category: 'group',
+      special: 'tri_newyear',
+      option1: 0,
+    })).toBe(68000)
+  })
+
   test('calPriceForSchedules', () => {
     expect(calPriceForSchedules(schedules, 0, 'C')).toStrictEqual({
       total: 133000,
