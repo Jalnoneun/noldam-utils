@@ -67,7 +67,7 @@ describe('matching funcs', () => {
       category: 'group',
       special: 'tri_newyear',
       option1: 0,
-    })).toBe(68000)
+    })).toBe(88000)
   })
 
   test('calPriceForSchedules', () => {

@@ -148,9 +148,7 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
     if (childCount === 1) {
       hourlyPrice = option1 === 0 ? 31000 : 31000
     } else if  (childCount === 2) {
-      hourlyPrice = option1 === 0 ? 34000 : 44000
-    } else if  (childCount === 3) {
-      hourlyPrice = option1 === 0 ? 39000 : 57000
+      hourlyPrice = option1 === 0 ? 44000 : 34000
     }
 
     return hourlyPrice
@@ -202,7 +200,6 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
     || special.includes('wadiz')
     || special.includes('posco')
   ) {
-
     return 0
   }
 
