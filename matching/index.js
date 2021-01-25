@@ -149,6 +149,8 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
       hourlyPrice = option1 === 0 ? 31000 : 31000
     } else if  (childCount === 2) {
       hourlyPrice = option1 === 0 ? 44000 : 34000
+    } else if  (childCount === 3) {
+      hourlyPrice = option1 === 0 ? 57000 : 39000
     }
 
     return hourlyPrice
