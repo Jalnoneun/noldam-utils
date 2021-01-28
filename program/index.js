@@ -95,11 +95,11 @@ const programOptions = {
   tri_newyear: [
     {
       value: 0,
-      text: '옛과자 강정',
+      text: '옛놀이 상자',
     },
     {
       value: 1,
-      text: '옛놀이 상자',
+      text: '옛과자 강정',
     },
   ],
   makingbox: [
