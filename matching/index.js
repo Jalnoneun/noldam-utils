@@ -16,11 +16,12 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
   if (!special
     || special === 'normal'
     || special === 'tutor'
-    || special === 'homecoming') {
-    const hourlyPrice = HOURLY_PRICE[rank] + 3000 * (childCount - 1)
+    || special === 'homecoming'
+    || special === 'group') {
+    const hourlyPrice = HOURLY_PRICE[rank] + 5000 * (childCount - 1)
     return hourlyPrice
   }
-
+  
   if (special === 'kidop') {
     let hourlyPrice = 0
 
