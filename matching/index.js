@@ -409,7 +409,7 @@ const matching = {
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD
-    define(['matching'], factory)
+    define([], factory)
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS
     module.exports = factory(matching)

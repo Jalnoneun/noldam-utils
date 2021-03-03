@@ -215,7 +215,7 @@ const schedule = {
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD
-    define(['schedule'], factory)
+    define(['moment'], factory)
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS
     module.exports = factory(schedule)
