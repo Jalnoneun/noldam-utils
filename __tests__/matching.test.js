@@ -1,6 +1,6 @@
 const {
   getTotalPrice,
-  getUnitPrice,
+  getHourlyPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,
@@ -29,24 +29,23 @@ describe('matching funcs', () => {
     },
   ]
 
-  test('getUnitPrice', () => {
-    expect(getUnitPrice({
+  test('getHourlyPrice - 전문 아이3', () => {
+    expect(getHourlyPrice({
       childCount: 3,
       rank: 'A'
-    })).toBe(26000)
+    })).toBe(30000)
   })
 
-  test('getUnitPrice - ignoreChildCount', () => {
-    expect(getUnitPrice({
-      childCount: 3,
-      rank: 'A'
-    }, true)).toBe(20000)
+  test('getHourlyPrice - 우수 아이2', () => {
+    expect(getHourlyPrice({
+      childCount: 2,
+      rank: 'B'
+    })).toBe(22000)
   })
 
   test('getTotalPrice - tri_cooking', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 3,
-      category: 'group',
       special: 'tri_cooking',
       option1: 0,
     })).toBe(105000)
@@ -55,7 +54,6 @@ describe('matching funcs', () => {
   test('getTotalPrice - tri_xmas', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 3,
-      category: 'group',
       special: 'tri_xmas',
       option1: 0,
     })).toBe(96000)
@@ -64,26 +62,9 @@ describe('matching funcs', () => {
   test('getTotalPrice - tri_newyear', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 2,
-      category: 'group',
       special: 'tri_newyear',
       option1: 0,
     })).toBe(88000)
-  })
-
-  test('calPriceForSchedules', () => {
-    expect(calPriceForSchedules(schedules, 0, 'C')).toStrictEqual({
-      total: 133000,
-      price: 133000,
-      sibling: 0,
-    })
-  })
-
-  test('calPriceForOnePlay', () => {
-    expect(calPriceForOnePlay(3, 2, 'B')).toStrictEqual({
-      total: 69000,
-      price: 51000,
-      sibling: 18000,
-    })
   })
 
   test('calDiscountPrice "amount"', () => {

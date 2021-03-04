@@ -13,6 +13,7 @@ const { HOURLY_PRICE } = require('../lib/values')
  */
 const getUnitPrice = params => {
   const {
+    childCount,
     rank,
     special,
     option1,
@@ -269,7 +270,7 @@ const getTotalPrice = (schedules, params) => {
     option3,
   } = params
   const { totalHour } = getScheduleInfo(schedules)
-  const hourlyWage = getUnitPrice({
+  const hourlyWage = getHourlyPrice({
     childCount,
     category,
     special,
