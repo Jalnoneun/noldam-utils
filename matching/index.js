@@ -1,8 +1,11 @@
 const { getScheduleInfo } = require('../schedule')
 const { toCurrency } = require('../wage')
-const { HOURLY_PRICE, SIBLING_HOURLY } = require("../lib/values")
 
-const getUnitPrice = (params, ignoreChildCount = false) => {
+/**
+ * deprecated - 단위별 가격 조회
+ * @param {object} params
+ */
+const getUnitPrice = params => {
   const {
     special,
     rank,
@@ -10,15 +13,20 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
     option2,
     option3,
   } = params
-  
-  const childCount = ignoreChildCount ? 1 : params.childCount
 
   if (!special
-    || special === 'normal'
-    || special === 'tutor'
-    || special === 'homecoming'
-    || special === 'group') {
+  || special === 'normal'
+  || special === 'tutor'
+  || special === 'homecoming'
+  || special === 'group') {
+    
+    // 아이 추가 당 5000원으로 계산한 로직
     const hourlyPrice = HOURLY_PRICE[rank] + 5000 * (childCount - 1)
+
+    // 아이 수 별 가격 먼저 구하는 로직
+    // const pricePerChild = getPricePerChild(childCount, rank)
+    // const hourlyPrice = pricePerChild * childCount
+
     return hourlyPrice
   }
   
@@ -209,7 +217,36 @@ const getUnitPrice = (params, ignoreChildCount = false) => {
   throw new Error('잘못된 분류입니다')
 }
 
+/**
+ * 시간당 가격 조회
+ * @param {string} rank 시터 등급 A, B, C
+ * @param {number} siblings 아이 추가 수
+ * @returns {Object} 시급 정보
+ */
+const getHourlyPrice = getUnitPrice
 
+
+/**
+ * 아이 수 별 가격
+ */
+const getPricePerChild = (childCount, rank) => {
+  if (childCount === 1) {
+    if (rank === 'C') return 14000
+    else if (rank === 'B') return 17000
+    else if (rank === 'A') return 20000
+  }
+  else if (childCount === 2) {
+   if (rank === 'C') return 9500
+   else if (rank === 'B') return 11000
+   else if (rank === 'A') return 12500
+  }
+  else if (childCount === 3) {
+   if (rank === 'C') return 8000
+   else if (rank === 'B') return 9000
+   else if (rank === 'A') return 10000
+  }
+  return -1
+}
 
 const getTotalPrice = (schedules, params) => {
   const {
@@ -303,26 +340,8 @@ const getCategory = special => {
   }
 }
 
-
-
 /**
- * 시간당 가격 조회
- * @param {string} rank 시터 등급 A, B, C
- * @param {number} siblings 아이 추가 수
- * @returns {Object} 시급 정보
- */
-const getHourlyPrice = (rank, siblings) => {
-  const price = HOURLY_PRICE[rank]
-  const sibling = SIBLING_HOURLY * siblings
-  return {
-    total: price + sibling,
-    price,
-    sibling,
-  }
-}
-
-/**
- * schedules 객체 배열을 통해 가격 추출
+ * (deprecated) schedules 객체 배열을 통해 가격 추출
  * @param {Object[]} schedules 일정 정보를 담은 배열
  * @param {number} schedules[].day 요일 index. 월요일 0, 일요일 6
  * @param {number} schedules[].hour 놀이 진행 시간
@@ -343,7 +362,7 @@ const calPriceForSchedules = (schedules, siblings, rank) => {
 }
 
 /**
- * schedules 객체 배열을 통해 가격 추출
+ * (deprecated) schedules 객체 배열을 통해 가격 추출
  * @param {number} hour 놀이시간
  * @param {number} siblings 아이 추가 수
  * @param {string} rank 시터 등급 A, B, C
@@ -397,9 +416,10 @@ const getDiscountInfo = discount => {
 
 const matching = {
   getUnitPrice,
+  getHourlyPrice,
+  getPricePerChild,
   getTotalPrice,
   getOrderName,
-  getHourlyPrice,
   calPriceForSchedules,
   calPriceForOnePlay,
   calDiscountPrice,
