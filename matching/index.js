@@ -1,14 +1,20 @@
 const { getScheduleInfo } = require('../schedule')
 const { toCurrency } = require('../wage')
+const { HOURLY_PRICE } = require('../lib/values')
 
 /**
  * deprecated - 단위별 가격 조회
- * @param {object} params
+ * @param {Object} params
+ * @param {string} params.rank 시터 등급
+ * @param {string} params.special 프로그램 id
+ * @param {string} params.option1 프로그램 옵션1
+ * @param {string} params.option2 프로그램 옵션2
+ * @param {string} params.option3 프로그램 옵션3
  */
 const getUnitPrice = params => {
   const {
-    special,
     rank,
+    special,
     option1,
     option2,
     option3,
@@ -219,15 +225,19 @@ const getUnitPrice = params => {
 
 /**
  * 시간당 가격 조회
- * @param {string} rank 시터 등급 A, B, C
- * @param {number} siblings 아이 추가 수
- * @returns {Object} 시급 정보
+ * @param {Object} params
+ * @param {string} params.rank 시터 등급
+ * @param {string} params.special 프로그램 id
+ * @param {string} params.option1 프로그램 옵션1
+ * @param {string} params.option2 프로그램 옵션2
+ * @param {string} params.option3 프로그램 옵션3
  */
 const getHourlyPrice = getUnitPrice
 
-
 /**
- * 아이 수 별 가격
+ * 아이 당 가격 조회
+ * @param {number} childCount 
+ * @param {string} rank 
  */
 const getPricePerChild = (childCount, rank) => {
   if (childCount === 1) {
@@ -340,6 +350,17 @@ const getCategory = special => {
   }
 }
 
+const getHourlyPrice_deprecated = (rank, siblings) => {
+  const price = HOURLY_PRICE[rank]
+  const sibling = SIBLING_HOURLY * siblings
+  return {
+    total: price + sibling,
+    price,
+    sibling,
+  }
+}
+
+
 /**
  * (deprecated) schedules 객체 배열을 통해 가격 추출
  * @param {Object[]} schedules 일정 정보를 담은 배열
@@ -353,7 +374,7 @@ const getCategory = special => {
  */
 const calPriceForSchedules = (schedules, siblings, rank) => {
   const { totalHour } = getScheduleInfo(schedules)
-  const { total, price, sibling } = getHourlyPrice(rank, siblings)
+  const { total, price, sibling } = getHourlyPrice_deprecated(rank, siblings)
   return {
     total: total * totalHour,
     price: price  * totalHour,
@@ -369,7 +390,7 @@ const calPriceForSchedules = (schedules, siblings, rank) => {
  * @returns {Object} 놀이 1회분 금액 정보
  */
 const calPriceForOnePlay = (hour, siblings, rank) => {
-  const { total, price, sibling } = getHourlyPrice(rank, siblings)
+  const { total, price, sibling } = getHourlyPrice_deprecated(rank, siblings)
   return {
     total: total * hour,
     price: price  * hour,
