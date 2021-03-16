@@ -15,7 +15,8 @@ const getUnitWage = ({
   if (!special
     || special === 'normal'
     || special === 'tutor'
-    || special === 'homecoming') {
+    || special === 'homecoming'
+    || special === 'group') {
     const baseWage = HOURLY_WAGE[2][rank]
     const extra = 3000 * (childCount - 1)
     const hourlyWage = baseWage + extra
@@ -36,15 +37,6 @@ const getUnitWage = ({
 
     return hourlyWage
     
-  } else if (special === 'neighborhood') {
-    // 동네돌봄 일상
-    if (childCount < 2 || childCount > 5) {
-      throw new Error('[childCount] 참여 아이 수 오류 2~5명까지 가능')
-    }
-    const baseWage = 10000
-    const extra = 3000 * (childCount - 1)
-    const hourlyWage = baseWage + extra
-    return hourlyWage
   } else if (special.includes('tri_')) {
     const baseWage = 14000
     const extra = 3000 * (childCount - 1)
