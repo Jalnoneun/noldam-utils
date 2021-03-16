@@ -28,7 +28,7 @@ const getUnitPrice = params => {
   || special === 'group') {
     
     // 아이 추가 당 5000원으로 계산한 로직
-    const hourlyPrice = HOURLY_PRICE[rank] + 5000 * (childCount - 1)
+    const hourlyPrice = HOURLY_PRICE[rank] + 3000 * (childCount - 1)
 
     // 아이 수 별 가격 먼저 구하는 로직
     // const pricePerChild = getPricePerChild(childCount, rank)
@@ -82,6 +82,38 @@ const getUnitPrice = params => {
       hourlyPrice = childCount === 3 ? 52500 : 44000
     } else if (option1 === 1) {
       hourlyPrice = childCount === 3 ? 60000 : 49000
+    }
+
+    return hourlyPrice
+  } else if (special === 'tri_spring') {
+    // 삼총사 봄을찾기 클래스 - 2시간 고정
+
+    // option1 Validation
+    if (![0, 1].includes(option1)) {
+      throw new Error('[option1] 선택 오류')
+    }
+
+    // childCount Validation
+    if (childCount > 3 || childCount <= 0) {
+      throw new Error('[childCount] 참여 아이 수 오류 2,3명만 가능')
+    }
+    let hourlyPrice = null
+    if (option1 === 0) {
+      if (childCount === 3) {
+        hourlyPrice = 67500
+      } else if (childCount === 2) {
+        hourlyPrice = 52000
+      } else if (childCount === 1) {
+        hourlyPrice = 34000
+      }
+    } else if (option1 === 1) {
+      if (childCount === 3) {
+        hourlyPrice = 45000
+      } else if (childCount === 2) {
+        hourlyPrice = 40000
+      } else if (childCount === 1) {
+        hourlyPrice = 29000
+      }
     }
 
     return hourlyPrice

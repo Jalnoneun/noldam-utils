@@ -51,6 +51,14 @@ describe('matching funcs', () => {
     })).toBe(105000)
   })
 
+  test('getTotalPrice - tri_spring', () => {
+    expect(getTotalPrice(hour2_schedules, {
+      childCount: 2,
+      special: 'tri_spring',
+      option1: 0,
+    })).toBe(104000)
+  })
+
   test('getTotalPrice - tri_xmas', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 3,

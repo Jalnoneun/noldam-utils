@@ -5,10 +5,13 @@ const categoryTitle = {
 }
 
 const programTitle = {
+  normal: '1:1 돌봄',
+  group: '여럿이서 돌봄',
   kidop: '키돕',
   booktalk: '북토크',
   tutor: '놀담학습도우미',
   tri_cooking: '삼총사 - 피나포레',
+  tri_spring: '삼총사 - 봄을찾기',
   tri_cooking2: '삼총사 - 피나포레 2탄',
   tri_mongcle: '삼총사 - 몽클',
   tri_simda: '삼총사 - 심다',
@@ -52,6 +55,16 @@ const programOptions = {
           text: '바크 초콜릿'
         },
       ]
+    },
+  ],
+  tri_spring: [
+    {
+      value: 0,
+      text: '테라리움',
+    },
+    {
+      value: 1,
+      text: '벚꽃 머랭쿠키',
     },
   ],
   tri_mongcle: [
