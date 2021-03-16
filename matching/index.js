@@ -28,7 +28,7 @@ const getUnitPrice = params => {
   || special === 'group') {
     
     // 아이 추가 당 5000원으로 계산한 로직
-    const hourlyPrice = HOURLY_PRICE[rank] + 3000 * (childCount - 1)
+    const hourlyPrice = HOURLY_PRICE[rank] + 5000 * (childCount - 1)
 
     // 아이 수 별 가격 먼저 구하는 로직
     // const pricePerChild = getPricePerChild(childCount, rank)
