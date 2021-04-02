@@ -5,18 +5,18 @@ const categoryTitle = {
 }
 
 const programTitle = {
-  normal: '1:1 돌봄',
+  normal: '일대일 돌봄',
   group: '여럿이서 돌봄',
   kidop: '키돕',
   booktalk: '북토크',
   tutor: '놀담학습도우미',
-  tri_cooking: '삼총사 - 피나포레',
-  tri_spring: '삼총사 - 봄을찾기',
-  tri_cooking2: '삼총사 - 피나포레 2탄',
-  tri_mongcle: '삼총사 - 몽클',
-  tri_simda: '삼총사 - 심다',
-  tri_xmas: '삼총사 - 크리스마스',
-  tri_newyear: '삼총사 - 소소한 새해맞이',
+  tri_cooking: '[삼총사] 피나포레',
+  tri_spring: '[삼총사] 우리아이 봄을찾기',
+  tri_cooking2: '[삼총사] 피나포레 2탄',
+  tri_mongcle: '[삼총사] 몽클',
+  tri_simda: '[삼총사] 심다',
+  tri_xmas: '[삼총사] 크리스마스',
+  tri_newyear: '[삼총사] 소소한 새해맞이',
   town: '동네탐구생활',
   shhport: '쉿포츠',
   sk_2005: 'SK 함께돌봄',
