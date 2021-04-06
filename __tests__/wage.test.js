@@ -37,7 +37,6 @@ describe('wage funcs', () => {
   test('getTotalWage', () => {
     expect(getTotalWage(schedules, {
       childCount: 3,
-      category: 'one',
       rank: 'A',
     })).toBe(40000)
   })
@@ -45,7 +44,6 @@ describe('wage funcs', () => {
   test('getTotalWage', () => {
     expect(getTotalWage(schedules, {
       childCount: 2,
-      category: 'group',
       special: 'shhport',
     })).toBe(40000)
   })
@@ -53,7 +51,6 @@ describe('wage funcs', () => {
   test('getTotalWage', () => {
     expect(getTotalWage(schedules, {
       childCount: 1,
-      category: 'with',
       special: 'sk_2005',
     })).toBe(20000)
   })
@@ -61,7 +58,6 @@ describe('wage funcs', () => {
   test('getTotalWage', () => {
     expect(getTotalWage(schedules, {
       childCount: 1,
-      category: 'with',
       special: 'sk_2005',
     })).toBe(20000)
   })

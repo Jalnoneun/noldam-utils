@@ -88,7 +88,6 @@ const getUnitWage = ({
  * 적절한 형태가 입력되지 않은 경우 오류 발생
  * @param {object} schedule 일정
  * @param {string} rank 시터 등급
- * @param {number} category 대분류
  * @param {number} childCount 아이 수
  * @param {number} special 클래스
  * @returns {number}
@@ -96,14 +95,12 @@ const getUnitWage = ({
 const getTotalWage = (schedules, params) => {
   const {
     childCount,
-    category,
     special,
     rank
   } = params
   const { totalHour } = getScheduleInfo(schedules)
   const hourlyWage = getUnitWage({
     childCount,
-    category,
     special,
     rank,
   })

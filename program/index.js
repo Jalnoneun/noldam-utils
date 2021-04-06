@@ -10,7 +10,7 @@ const programTitle = {
   kidop: '키돕',
   booktalk: '북토크',
   tutor: '놀담학습도우미',
-  tri_cooking: '[삼총사] 피나포레',
+  tri_cooking: '[삼총사] 쿠킹 클래스',
   tri_spring: '[삼총사] 우리아이 봄을찾기',
   tri_cooking2: '[삼총사] 피나포레 2탄',
   tri_mongcle: '[삼총사] 몽클',
@@ -30,31 +30,31 @@ const programOptions = {
   tri_cooking: [
     {
       value: 0,
-      text: 'A타입',
-      option2: [
-        {
-          value: 0,
-          text: '망고코코넛 아이스팝'
-        },
-        {
-          value: 1,
-          text: '알록달록 막대과자'
-        },
-      ]
+      text: '몬스터 컵케이크',
     },
     {
       value: 1,
-      text: 'B타입',
-      option2: [
-        {
-          value: 0,
-          text: '구미베어 젤리'
-        },
-        {
-          value: 1,
-          text: '바크 초콜릿'
-        },
-      ]
+      text: '머쉬멜로우 초콜릿 팝',
+    },
+    {
+      value: 2,
+      text: 'M&M 초콜릿 쿠키',
+    },
+    {
+      value: 3,
+      text: '알록달록 막대과자',
+    },
+    {
+      value: 4,
+      text: '망고코코넛 아이스팝',
+    },
+    {
+      value: 5,
+      text: '바크 초콜릿',
+    },
+    {
+      value: 6,
+      text: '구미베어 젤리',
     },
   ],
   tri_spring: [

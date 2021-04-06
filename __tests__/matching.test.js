@@ -43,36 +43,28 @@ describe('matching funcs', () => {
     })).toBe(22000)
   })
 
-  test('getTotalPrice - tri_cooking', () => {
+  test('getTotalPrice - tri_cooking(옵션0)', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 3,
       special: 'tri_cooking',
       option1: 0,
-    })).toBe(105000)
+    })).toBe(99000)
   })
 
-  test('getTotalPrice - tri_spring', () => {
+  test('getTotalPrice - tri_cooking(옵션3)', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 2,
-      special: 'tri_spring',
-      option1: 0,
-    })).toBe(104000)
+      special: 'tri_cooking',
+      option1: 3,
+    })).toBe(88000)
   })
 
-  test('getTotalPrice - tri_xmas', () => {
+  test('getTotalPrice - tri_cooking(옵션5)', () => {
     expect(getTotalPrice(hour2_schedules, {
       childCount: 3,
-      special: 'tri_xmas',
-      option1: 0,
-    })).toBe(96000)
-  })
-
-  test('getTotalPrice - tri_newyear', () => {
-    expect(getTotalPrice(hour2_schedules, {
-      childCount: 2,
-      special: 'tri_newyear',
-      option1: 0,
-    })).toBe(88000)
+      special: 'tri_cooking',
+      option1: 5,
+    })).toBe(120000)
   })
 
   test('calDiscountPrice "amount"', () => {

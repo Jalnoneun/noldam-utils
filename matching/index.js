@@ -65,23 +65,34 @@ const getUnitPrice = params => {
 
   } else if (special === 'tri_cooking') {
     // 삼총사 쿠킹 클래스 - 2시간 고정
-    // option1: option1 -> A타입, B타입 2가지 타입 각각 A타입: 0, B타입: 1
-    // (불필요) option2: option2 -> A타입, B타입 각각 2개의 선택지. 가격과는 무관
 
     // option1 Validation
-    if (![0, 1].includes(option1)) {
-      throw new Error('[option1] A,B타입 선택 오류')
+    if (![0, 1, 2, 3, 4, 5, 6].includes(option1)) {
+      throw new Error('option1 선택 오류')
     }
 
+    let type = 'A'
+    if ([3,4].includes(option1)) type = 'B'
+    else if ([5,6].includes(option1)) type = 'C'
+
     // childCount Validation
-    if (![2, 3].includes(childCount)) {
-      throw new Error('[childCount] 참여 아이 수 오류 2,3명만 가능')
+    if (type === 'A' && ![2, 3].includes(childCount)) {
+      throw new Error('childCount 오류 2,3만 가능')
+    } else if (![1, 2, 3].includes(childCount)) {
+      throw new Error('childCount 오류 1,2,3만 가능')
     }
+
     let hourlyPrice = null
-    if (option1 === 0) {
-      hourlyPrice = childCount === 3 ? 52500 : 44000
-    } else if (option1 === 1) {
-      hourlyPrice = childCount === 3 ? 60000 : 49000
+    if (type === 'A') {
+      hourlyPrice = childCount === 3 ? 49500 : 46500
+    } else if (type === 'B') {
+      hourlyPrice = 52500
+      if (childCount === 2) hourlyPrice = 44000
+      if (childCount === 1) hourlyPrice = 38000
+    } else if (type === 'C') {
+      hourlyPrice = 60000
+      if (childCount === 2) hourlyPrice = 49000
+      if (childCount === 1) hourlyPrice = 40500
     }
 
     return hourlyPrice
@@ -294,7 +305,6 @@ const getPricePerChild = (childCount, rank) => {
 const getTotalPrice = (schedules, params) => {
   const {
     childCount,
-    category,
     special,
     rank,
     option1,
@@ -304,7 +314,6 @@ const getTotalPrice = (schedules, params) => {
   const { totalHour } = getScheduleInfo(schedules)
   const hourlyWage = getHourlyPrice({
     childCount,
-    category,
     special,
     rank,
     option1,
