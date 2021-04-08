@@ -67,6 +67,13 @@ describe('matching funcs', () => {
     })).toBe(120000)
   })
 
+  test('getTotalPrice - apart_dreamgreen', () => {
+    expect(getTotalPrice(hour2_schedules, {
+      childCount: 3,
+      special: 'apart_dreamgreen',
+    })).toBe(0)
+  })
+
   test('calDiscountPrice "amount"', () => {
     expect(calDiscountPrice(40000, { type: 'amount', value: 5000 })).toBe(5000)
   })

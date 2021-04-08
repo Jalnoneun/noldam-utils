@@ -41,25 +41,25 @@ describe('wage funcs', () => {
     })).toBe(40000)
   })
 
-  test('getTotalWage', () => {
+  test('getTotalWage - shhport', () => {
     expect(getTotalWage(schedules, {
       childCount: 2,
       special: 'shhport',
     })).toBe(40000)
   })
 
-  test('getTotalWage', () => {
+  test('getTotalWage - sk_2005', () => {
     expect(getTotalWage(schedules, {
       childCount: 1,
       special: 'sk_2005',
     })).toBe(20000)
   })
 
-  test('getTotalWage', () => {
+  test('getTotalWage - apart_dreamgreen', () => {
     expect(getTotalWage(schedules, {
       childCount: 1,
-      special: 'sk_2005',
-    })).toBe(20000)
+      special: 'apart_dreamgreen',
+    })).toBe(36000)
   })
 
   test('getHourlyWage 전문 현재', () => {

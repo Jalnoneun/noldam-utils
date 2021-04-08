@@ -255,6 +255,8 @@ const getUnitPrice = params => {
     }
 
     return hourlyPrice
+  } else if (special === 'apart_dreamgreen') {
+    return 0
   } else if (special.includes('sk')
     || special.includes('jongno')
     || special.includes('hungry')

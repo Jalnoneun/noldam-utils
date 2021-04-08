@@ -67,6 +67,8 @@ const getUnitWage = ({
 
     return hourlyWage
 
+  } else if (special === 'apart_dreamgreen') {
+    return 18000
   } else if (special.includes('sk')
     || special.includes('jongno')
     || special.includes('hungry')
