@@ -255,7 +255,9 @@ const getUnitPrice = params => {
     }
 
     return hourlyPrice
-  } else if (special === 'apart_dreamgreen') {
+  } else if (special === 'apart_dreamgreen'
+    || special === 'space_salim_2104'
+  ) {
     return 0
   } else if (special.includes('sk')
     || special.includes('jongno')

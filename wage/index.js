@@ -69,6 +69,8 @@ const getUnitWage = ({
 
   } else if (special === 'apart_dreamgreen') {
     return 18000
+  } else if (special === 'space_salim_2104') {
+    return 16000
   } else if (special.includes('sk')
     || special.includes('jongno')
     || special.includes('hungry')
