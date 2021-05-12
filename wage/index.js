@@ -76,6 +76,7 @@ const getUnitWage = ({
     || special.includes('hungry')
     || special.includes('wadiz')
     || special.includes('posco')
+    || special === 'daily_care'
   ) {
     const baseWage = 10000
     const extra = 3000 * (childCount - 1)

@@ -25,7 +25,8 @@ const getUnitPrice = params => {
   || special === 'normal'
   || special === 'tutor'
   || special === 'homecoming'
-  || special === 'group') {
+  || special === 'group'
+  || special === 'daily_care') {
     
     // 아이 추가 당 5000원으로 계산한 로직
     const hourlyPrice = HOURLY_PRICE[rank] + 5000 * (childCount - 1)
@@ -36,13 +37,17 @@ const getUnitPrice = params => {
 
     return hourlyPrice
   }
-  
-  if (special === 'kidop') {
-    let hourlyPrice = 0
+
+  if (special === 'daily_care') {
+    const hourlyPrice = HOURLY_PRICE.C + 5000 * (childCount - 1)
+
+    return hourlyPrice
+  } else if (special === 'kidop') {
+    const hourlyPrice = 0
 
     return hourlyPrice
   } else if (special === 'booktalk') {
-    let hourlyPrice = 16000
+    const hourlyPrice = 16000
 
     return hourlyPrice
   } else if (special === 'neighborhood') {

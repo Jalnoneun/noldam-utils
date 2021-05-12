@@ -10,6 +10,7 @@ const programTitle = {
   kidop: '키돕',
   booktalk: '북토크',
   tutor: '놀담학습도우미',
+  daily_care: '일상돌봄',
   tri_cooking: '[삼총사] 쿠킹 클래스',
   tri_spring: '[삼총사] 우리아이 봄을찾기',
   tri_cooking2: '[삼총사] 피나포레 2탄',
